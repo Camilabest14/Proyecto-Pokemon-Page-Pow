@@ -1,0 +1,85 @@
+.pack-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+.card-pack {
+    background: linear-gradient(135deg, #ff66c4 60%, #8c52ff 100%);
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(140,82,255,0.15);
+    width: 220px;
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
+    position: relative;
+}
+.card-pack .pack-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+}
+.card-pack .pack-desc {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+.open-pack-btn {
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
+    border-radius: 12px;
+    background: #ff914d;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 0.8rem;
+    transition: background 0.2s;
+}
+.open-pack-btn:hover {
+    background: #ff66c4;
+}
+.cards-row {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0 1rem 0;
+}
+.poke-card {
+    width: 90px;
+    height: 130px;
+    background: #fff5fd;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px #8c52ff33;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.2s;
+    user-select: none;
+}
+.poke-card.flipped {
+    background: #fff;
+    flex-direction: column;
+    cursor: default;
+}
+.poke-card .card-back {
+    font-size: 2.2rem;
+    color: #ff66c4;
+    font-family: 'Material Icons Outlined', sans-serif;
+}
+.poke-card .poke-img {
+    width: 60px;
+    margin-bottom: 0.3rem;
+}
+.poke-card .poke-name {
+    font-size: 0.95rem;
+    color: #8c52ff;
+    font-weight: bold;
+    text-transform: capitalize;
+}

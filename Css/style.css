@@ -23,23 +23,6 @@ h1{
     z-index: 1000;
 }
 
-/* .nav-btn-2 {
-    padding: 0.5rem 1.5rem;
-    background: #ffcb05;
-    color: #2a75bb;
-    text-decoration: none;
-    border-radius: 999px;
-    font-weight: bold;
-    transition: background 0.2s;
-    border-color: black;
-    border: solid;
-}
-
-.nav-btn-2:hover {
-    background: #2a75bb;
-    color: #fff;
-} */
-
 .input-tipo-pokemon{
     text-align: center;
     margin: 5px;

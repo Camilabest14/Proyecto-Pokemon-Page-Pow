@@ -11,8 +11,17 @@
 </head>
 <body>
     <main class="main-sobres" style="text-align:center; margin-top:60px;">
-        <h1>Abrir Sobre</h1>
-        <p>Haz clic en el botón para desbloquear un Pokémon (Bulbasaur, ID 1):</p>
+        <div class="pack-container">
+            <div class="card-pack">
+                <div class="pack-title">Pokémon TCG</div>
+                <div class="pack-desc">5 cartas</div>
+                <button id="open-pack-btn" class="open-pack-btn">
+                    <i class="fas fa-gift"></i> Abrir Sobre
+                </button>
+            </div>
+            <div id="cards-row" class="cards-row"></div>
+        </div>
+        <!-- Debug buttons -->
         <button id="unlock-btn" style="padding:1rem 2rem; font-size:1.2rem; border-radius:12px; background:var(--primary,#ff66c4); color:white; border:none; cursor:pointer;">
             <i class="fas fa-gift"></i> Desbloquear Pokémon
         </button>
@@ -26,7 +35,5 @@
     </main>
     <div id="footer"></div>
     <script src="js/Sobres.js"></script>
-</body>
-</html>
 </body>
 </html>

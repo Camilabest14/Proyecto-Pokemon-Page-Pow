@@ -68,6 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById('block-btn').addEventListener('click', function() {
         const resultDiv = document.getElementById('result');
+        //por ahora, id del pokemon a bloquear
         if (blockPokemon(1)) {
             resultDiv.textContent = "Bulbasaur ha sido bloqueado.";
         } else {
@@ -79,5 +80,60 @@ document.addEventListener('DOMContentLoaded', function() {
         blockAllPokemon();
         const resultDiv = document.getElementById('result');
         resultDiv.textContent = "¡Todos los Pokémon han sido bloqueados!";
+    });
+});
+
+// array de IDs válidos (1-150)
+const VALID_POKEMON_IDS = Array.from({length: 150}, (_, i) => i + 1);
+
+// Función para obtener 5 IDs aleatorios (pueden ser repetidos)
+function getRandomPackIds() {
+    const pack = [];
+    for (let i = 0; i < 5; i++) {
+        const idx = Math.floor(Math.random() * VALID_POKEMON_IDS.length);
+        pack.push(VALID_POKEMON_IDS[idx]);
+    }
+    return pack;
+}
+
+// Mostrar cartas boca abajo y manejar el flip
+function showPackCards(ids) {
+    const row = document.getElementById('cards-row');
+    row.innerHTML = '';
+    ids.forEach(id => {
+        const card = document.createElement('div');
+        card.className = 'poke-card';
+        card.innerHTML = `<span class="card-back">🃏</span>`;
+        card.addEventListener('click', async function handleFlip() {
+            // Evitar doble click
+            if (card.classList.contains('flipped')) return;
+            card.classList.add('flipped');
+            // Obtener datos del Pokémon
+            const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+            const poke = await res.json();
+            card.innerHTML = `
+                <img class="poke-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png" alt="${poke.name}">
+                <div class="poke-name">${poke.name}</div>
+            `;
+            card.removeEventListener('click', handleFlip);
+        });
+        row.appendChild(card);
+    });
+}
+
+// Evento para abrir el sobre
+document.addEventListener('DOMContentLoaded', function() {
+    const openBtn = document.getElementById('open-pack-btn');
+    openBtn.addEventListener('click', function() {
+        const packIds = getRandomPackIds();
+        if (packIds.length === 0) {
+            document.getElementById('cards-row').innerHTML = '<div style="color:#8c52ff;font-weight:bold;">¡Ya tienes todos los Pokémon desbloqueados!</div>';
+            return;
+        }
+        // Desbloquear los Pokémon del sobre
+        const unlocked = getUnlockedPokemonFromStorage();
+        const nuevos = [...unlocked, ...packIds];
+        updateUnlockedPokemon([...new Set(nuevos)]);
+        showPackCards(packIds);
     });
 });
