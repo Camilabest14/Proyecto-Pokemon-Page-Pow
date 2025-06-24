@@ -1,0 +1,76 @@
+body {
+    background: linear-gradient(90deg, #8c52ff, #ff914d);
+    padding-bottom: 80px;
+}
+
+h1{
+    text-align: center;
+}
+
+.navbar {
+    display: flex;
+    gap: 1rem;
+    background: linear-gradient(90deg, #ffde59, #ff66c4);
+    padding: 1rem;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 -2px 4px rgba(0,0,0,0.05);
+    border-color: black;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+}
+
+.nav-btn {
+    padding: 0.5rem 1.5rem;
+    background: #ffcb05;
+    color: #2a75bb;
+    text-decoration: none;
+    border-radius: 999px;
+    font-weight: bold;
+    transition: background 0.2s;
+    border-color: black;
+    border: solid;
+}
+
+.nav-btn:hover {
+    background: #2a75bb;
+    color: #fff;
+}
+
+.input-tipo-pokemon{
+    text-align: center;
+    margin: 5px;
+}
+
+.opciones-tipo {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    padding: 0.5rem 0;
+    justify-content: flex-start;
+    scrollbar-width: thin;
+    scrollbar-color: #ffcb05 #f8f8f8;
+    margin-bottom: 1rem;
+}
+
+.type-btn {
+    padding: 0.5rem 1.2rem;
+    background: #ffcb05;
+    color: #2a75bb;
+    border: none;
+    border-radius: 999px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
+    outline: none;
+}
+
+.type-btn.active,
+.type-btn:hover {
+    background: #2a75bb;
+    color: #fff;
+}

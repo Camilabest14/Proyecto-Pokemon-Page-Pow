@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon TCG Collection</title>
+    <link rel="stylesheet" href="css/Coleccion.css">
+    <link rel="stylesheet" href="css/Footer.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined" rel="stylesheet">
+</head>
+<body>
+    <!-- Filtros -->
+    <div class="filters">
+        <input type="text" id="nameFilter" placeholder="Buscar Pokémon...">
+        <select id="typeFilter">
+            <option value="">Todos los tipos</option>
+            <option value="normal">Normal</option>
+            <option value="fire">Fuego</option>
+            <option value="water">Agua</option>
+            <option value="electric">Eléctrico</option>
+            <option value="grass">Planta</option>
+            <option value="ice">Hielo</option>
+            <option value="fighting">Lucha</option>
+            <option value="poison">Veneno</option>
+            <option value="ground">Tierra</option>
+            <option value="flying">Volador</option>
+            <option value="psychic">Psíquico</option>
+            <option value="bug">Bicho</option>
+            <option value="rock">Roca</option>
+            <option value="ghost">Fantasma</option>
+            <option value="dragon">Dragón</option>
+        </select>
+    </div>
+
+    <!-- Grid de Pokémon -->
+    <div id="pokemonGrid" class="pokemon-grid">
+        <!-- Se genera dinámicamente -->
+    </div>
+
+    <!-- Modal -->
+    <div id="pokemonModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modalBody">
+                <!-- Contenido del modal -->
+            </div>
+        </div>
+    </div>
+
+    <script src="js/Coleccion.js"></script>
+
+    <header class="navbar">
+        <a href="index.html" class="nav-btn">Inicio</a> 
+        <a href="Coleccion.html" class="nav-btn">Coleccion</a>
+        <a href="#" class="nav-btn">Sobres</a>        
+        <a href="#" class="nav-btn">Intercambio</a>
+    </header>
+
+    <footer class="navbar">
+        <a href="index.html" class="nav-btn">
+            <i class="material-icons-outlined">home</i>
+            <span>Inicio</span>
+        </a>
+        <a href="Coleccion.html" class="nav-btn">
+            <i class="material-icons-outlined">inventory_2</i>
+            <span>Coleccion</span>
+        </a>
+        <a href="#" class="nav-btn">
+            <i class="material-icons-outlined">card_giftcard</i>
+            <span>Sobres</span>
+        </a>        
+        <a href="#" class="nav-btn">
+            <i class="material-icons-outlined">swap_horiz</i>
+            <span>Intercambio</span>
+        </a>
+    </footer>
+
+</body>
+</html>
