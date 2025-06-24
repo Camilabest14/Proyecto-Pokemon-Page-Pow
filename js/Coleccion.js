@@ -1,7 +1,17 @@
 // Datos globales
 let allPokemon = [];
-let unlockedPokemon = [1, 4, 7, 25, 94, 149, 150]; // Ejemplo: algunos desbloqueados
 let filteredPokemon = [];
+
+let unlockedPokemon = getUnlockedPokemonFromStorage();
+
+function getUnlockedPokemonFromStorage() {
+    const data = localStorage.getItem('unlockedPokemon');
+    return data ? JSON.parse(data) : [];
+}
+
+function setUnlockedPokemonToStorage(ids) {
+    localStorage.setItem('unlockedPokemon', JSON.stringify(ids));
+}
 
 // Inicialización
 document.addEventListener('DOMContentLoaded', async () => {
@@ -215,6 +225,7 @@ function showError(message) {
 // Función para que el Integrante A pueda actualizar cartas desbloqueadas
 function updateUnlockedPokemon(newUnlockedIds) {
     unlockedPokemon = newUnlockedIds;
+    setUnlockedPokemonToStorage(unlockedPokemon);
     allPokemon.forEach(pokemon => {
         pokemon.isUnlocked = unlockedPokemon.includes(pokemon.id);
     });
@@ -224,6 +235,7 @@ function updateUnlockedPokemon(newUnlockedIds) {
     );
 }
 
+//fecth de tipos para filtro
 async function populateTypeFilter(){
     const select = document.getElementById('typeFilter');
     try{
