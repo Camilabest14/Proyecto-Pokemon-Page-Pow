@@ -10,6 +10,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderPokemonGrid();
     setupEventListeners();
     hideLoading();
+    await populateTypeFilter();
+
+    fetch('components/Footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('footer').innerHTML = data;
+        });
 });
 
 // Cargar datos de Pokémon (optimizado)
@@ -204,6 +211,27 @@ function updateUnlockedPokemon(newUnlockedIds) {
         document.getElementById('nameFilter').value,
         document.getElementById('typeFilter').value
     );
+}
+
+async function populateTypeFilter(){
+    const select = document.getElementById('typeFilter');
+    try{
+        const response = await fetch('https://pokeapi.co/api/v2/type');
+        const data = await response.json();
+        const typeResults = data.results.slice(0,18);
+        for(const type of typeResults){
+            const typeResponse = await fetch(type.url);
+            const typeData = await typeResponse.json();
+            const spanishNameObj = typeData.names.find(n => n.language.name === "es");
+            const spanishName = spanishNameObj ? spanishNameObj.name : capitalize(type.name);
+            const option = document.createElement('option');
+            option.value = type.name;
+            option.textContent = spanishName;
+            select.appendChild(option);
+        }
+    } catch(error){
+        console.error('Error cargando tipos:', error);
+    }
 }
 
 // Exponer función globalmente para integración
