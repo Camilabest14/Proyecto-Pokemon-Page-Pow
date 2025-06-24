@@ -85,7 +85,18 @@ async function openPokemonModal(pokemonId) {
     try {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
         const pokemon = await response.json();
-        
+
+        // Fetch Spanish stat names
+        const statNamesES = {};
+        await Promise.all(
+            pokemon.stats.map(async statObj => {
+                const statRes = await fetch(statObj.stat.url);
+                const statData = await statRes.json();
+                const esNameObj = statData.names.find(n => n.language.name === "es");
+                statNamesES[statObj.stat.name] = esNameObj ? esNameObj.name : statObj.stat.name;
+            })
+        );
+
         modalBody.innerHTML = `
             <div class="pokemon-detail">
                 <img src="${pokemon.sprites.other['official-artwork'].front_default || pokemon.sprites.front_default}" 
@@ -102,7 +113,7 @@ async function openPokemonModal(pokemonId) {
                     <h3>Estadísticas Base:</h3>
                     ${pokemon.stats.map(stat => `
                         <div class="stat-item">
-                            <span>${stat.stat.name}:</span>
+                            <span>${statNamesES[stat.stat.name]}:</span>
                             <strong>${stat.base_stat}</strong>
                         </div>
                     `).join('')}
@@ -218,7 +229,7 @@ async function populateTypeFilter(){
     try{
         const response = await fetch('https://pokeapi.co/api/v2/type');
         const data = await response.json();
-        const typeResults = data.results.slice(0,18);
+        const typeResults = data.results;
         for(const type of typeResults){
             const typeResponse = await fetch(type.url);
             const typeData = await typeResponse.json();
