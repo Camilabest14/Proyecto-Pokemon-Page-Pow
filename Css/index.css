@@ -1,0 +1,35 @@
+.main-home {
+    max-width: 500px;
+    margin: 60px auto 0 auto;
+    background: rgba(255,255,255,0.85);
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(140,82,255,0.08);
+    padding: 2rem 1.5rem 3rem 1.5rem;
+    text-align: center;
+}
+.subtitle {
+    color: #8c52ff;
+    margin-bottom: 2rem;
+    font-size: 1.2rem;
+}
+.home-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+.home-pokemon-img {
+    width: 120px;
+    margin-top: 1.5rem;
+    filter: drop-shadow(0 2px 8px #ff66c4aa);
+}
+@media (max-width: 600px) {
+    .main-home {
+        margin: 30px 5px 0 5px;
+        padding: 1rem 0.5rem 2.5rem 0.5rem;
+    }
+    .home-pokemon-img {
+        width: 80px;
+    }
+}

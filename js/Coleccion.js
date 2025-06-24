@@ -86,7 +86,7 @@ async function openPokemonModal(pokemonId) {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
         const pokemon = await response.json();
 
-        // Fetch Spanish stat names
+        // stats en ES
         const statNamesES = {};
         await Promise.all(
             pokemon.stats.map(async statObj => {
