@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intercambio Pokémon</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/intercambio.css"> <!-- ← solo si tienes este archivo -->
+  <link rel="stylesheet" href="css/Footer.css">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="intercambio">
+  <main class="main-home">
+    <div class="intercambio-contenedor">
+    <h2 class="subtitle">Tus Cartas</h2>
+    <div class="home-actions" id="cartas-propias">
+      <!-- Las cartas desbloqueadas se insertan aquí dinámicamente -->
+    </div>
+
+    <h2 class="subtitle" id="titulo-remoto">Carta del otro usuario</h2>
+    <div class="home-actions" id="cartas-remotas">
+      <!-- Se insertará la carta seleccionada del otro usuario -->
+    </div>
+
+    <button class="boton" disabled>¡Proponer Intercambio!</button>
+    </div> <!-- cierre de .intercambio-contenedor -->
+</main>
+  </main>
+
+  <div id="footer"></div>
+
+  <!-- Librerías -->
+  <script src="https://cdn.ably.io/lib/ably.min-1.js"></script>
+  <script src="js/intercambio.js"></script>
+</body>
+</html>

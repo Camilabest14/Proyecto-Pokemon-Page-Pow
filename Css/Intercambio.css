@@ -1,0 +1,43 @@
+.carta {
+  width: 110px;
+  height: 160px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(140, 82, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 0.95rem;
+  position: relative;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  padding: 8px;
+  text-align: center;
+}
+
+.carta img {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.carta .name {
+  font-size: 0.8rem;
+  color: rgb(8, 8, 8);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 6px 10px;
+  border-radius: 20px;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+}
+
+/* Estado seleccionado */
+.carta.seleccionada {
+  transform: scale(1.08);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+  border: 2px solid white;
+}
