@@ -3,34 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokémon TCG - Inicio</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/index.css">
+    <title>Pokémon List</title>
     <link rel="stylesheet" href="css/Footer.css">
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            font-family: Arial, sans-serif;
+            background: 
+                linear-gradient(to right, rgba(147, 35, 199, 0.8), rgba(143, 180, 229, 0.8)),
+                url('Imagenes/Pokemon.jpg') center/cover no-repeat fixed;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding-bottom: 70px;
+            position: relative;
+            z-index: 1; 
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 5rem;
+            color: white;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8);
+            text-align: center;
+        }
+
+        .pokemon-img {
+            width: 500px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            border: 4px solid white;
+        }
+
+        .navbar {
+            display: flex;
+            gap: 1rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 1rem;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1000;
+        }
+
+        .background-img, .overlay {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    <main class="main-home">
-        <h1>Pokémon TCG Collection</h1>
-        <p class="subtitle">¡Colecciona, explora y descubre tus cartas Pokémon favoritas!</p>
-        <div class="home-actions">
-            <a href="Coleccion.html" class="nav-btn-2">
-                <i class="fas fa-archive"></i>
-                Ver Colección
-            </a>
-            <a href="#" class="nav-btn-2">
-                <i class="fas fa-gift"></i>
-                Abrir Sobres
-            </a>
-            <a href="#" class="nav-btn-2">
-                <i class="fas fa-exchange-alt"></i>
-                Intercambio
-            </a>
-        </div>
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="Pikachu" class="home-pokemon-img">
+    <main class="main-content">
+        <h1>PikaDeck</h1>
     </main>
-    <div id="footer"></div>
-    <script src="js/index.js"></script>
+    
+    <footer class="navbar">
+        <a href="index.html" class="nav-btn">
+            <i class="material-icons-outlined">home</i>
+            <span>Inicio</span>
+        </a>
+        <a href="Coleccion.html" class="nav-btn">
+            <i class="material-icons-outlined">inventory_2</i>
+            <span>Coleccion</span>
+        </a>
+        <a href="#" class="nav-btn">
+            <i class="material-icons-outlined">card_giftcard</i>
+            <span>Sobres</span>
+        </a>        
+        <a href="#" class="nav-btn">
+            <i class="material-icons-outlined">swap_horiz</i>
+            <span>Intercambio</span>
+        </a>
+    </footer>
 </body>
 </html>
