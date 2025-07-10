@@ -12,17 +12,19 @@
 <body>
     <main class="main-sobres" style="text-align:center; margin-top:60px;">
         <section class="pack-container">
-            <div class="card-pack">
-                <div class="pack-title">Pokémon TCG</div>
-                <div class="pack-desc">6 cartas</div>
+            <article class="card-pack">
+                <header>
+                    <h1 class="pack-title">Pokémon TCG</h1>
+                    <p class="pack-desc">6 cartas</p>
+                </header>
                 <button id="open-pack-btn" class="open-pack-btn">
                     <i class="fas fa-gift"></i> Abrir Sobre
                 </button>
-            </div>
-            <div id="cards-row" class="cards-row"></div>
+            </article>
+            <section id="cards-row" class="cards-row" aria-label="Cartas"></section>
         </section>
     </main>
-    <div id="footer"></div>
+    <footer id="footer"></footer>
     <script src="../js/Sobres.js"></script>
 </body>
 </html>

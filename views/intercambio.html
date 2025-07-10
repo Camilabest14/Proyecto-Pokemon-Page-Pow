@@ -15,12 +15,14 @@
 <body class="intercambio">
   <main class="main-home">
     <section class="intercambio-contenedor">
-      <h1 id="trade-status-title">Intercambio Pokémon</h1>
-      <p id="trade-status-subtitle">Selecciona hasta 5 cartas para ofrecer.</p>
+      <header>
+        <h1 id="trade-status-title">Intercambio Pokémon</h1>
+        <p id="trade-status-subtitle">Selecciona hasta 5 cartas para ofrecer.</p>
+      </header>
 
       <!-- Vista de Selección de Cartas -->
       <section id="selection-view">
-        <div class="selection-layout">
+        <section class="selection-layout">
           <section class="selection-grid-wrapper">
             <h2 class="subtitle">Tus Cartas</h2>
             <section class="card-grid" id="cartas-propias">
@@ -34,12 +36,12 @@
               <p>Esperando jugadores...</p>
             </section>
           </aside>
-        </div>
+        </section>
       </section>
 
       <!-- Vista de Confirmación -->
       <section id="confirmation-view" class="hidden">
-        <div class="trade-offer-container">
+        <section class="trade-offer-container">
           <section class="offer-side">
             <h2 class="subtitle" id="local-user-name">Tu Oferta</h2>
             <section id="local-offer-card" class="card-grid"></section>
@@ -49,23 +51,23 @@
             <h2 class="subtitle" id="remote-user-name">Oferta de...</h2>
             <section id="remote-offer-card" class="card-grid"></section>
           </section>
-        </div>
-        <div class="confirmation-buttons">
+        </section>
+        <section class="confirmation-buttons">
           <button id="accept-btn" class="boton success">Aceptar</button>
           <button id="decline-btn" class="boton danger">Rechazar</button>
-        </div>
+        </section>
       </section>
     </section>
   </main>
 
   <!-- Modal para detalles de Pokémon -->
   <section id="pokemonModal" class="modal hidden">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <div id="modalBody">
+    <section class="modal-content">
+        <button class="close" aria-label="Cerrar">&times;</button>
+        <section id="modalBody">
             <!-- Contenido del modal -->
-        </div>
-    </div>
+        </section>
+    </section>
   </section>
 
   <footer id="footer"></footer>
