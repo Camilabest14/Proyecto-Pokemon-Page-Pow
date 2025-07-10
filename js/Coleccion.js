@@ -1,9 +1,9 @@
 // Datos globales
 let allPokemon = [];
 let filteredPokemon = [];
+let unlockedPokemon = [];
 
-let unlockedPokemon = getUnlockedPokemonFromStorage();
-
+// Funciones para LocalStorage
 function getUnlockedPokemonFromStorage() {
     const data = localStorage.getItem('unlockedPokemon');
     return data ? JSON.parse(data) : [];
@@ -15,6 +15,10 @@ function setUnlockedPokemonToStorage(ids) {
 
 // Inicialización
 document.addEventListener('DOMContentLoaded', async () => {
+    // 1. Cargar Pokémon desbloqueados primero
+    unlockedPokemon = getUnlockedPokemonFromStorage();
+    console.log('Pokémon desbloqueados al iniciar:', unlockedPokemon);
+    
     showLoading();
     await loadPokemonData();
     renderPokemonGrid();
@@ -36,6 +40,7 @@ async function loadPokemonData() {
         const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=150');
         const data = await response.json();
         
+        // Mapear directamente con el estado de desbloqueo
         allPokemon = data.results.map((pokemon, index) => ({
             id: index + 1,
             name: pokemon.name,
@@ -222,17 +227,23 @@ function showError(message) {
     alert(message); // En producción usar algo más elegante
 }
 
-// Función para que el Integrante A pueda actualizar cartas desbloqueadas
+// Función para actualizar cartas desbloqueadas
 function updateUnlockedPokemon(newUnlockedIds) {
+    // Actualizar en localStorage
+    setUnlockedPokemonToStorage(newUnlockedIds);
+    
+    // Actualizar en memoria
     unlockedPokemon = newUnlockedIds;
-    setUnlockedPokemonToStorage(unlockedPokemon);
+    
+    // Actualizar el estado en cada Pokémon
     allPokemon.forEach(pokemon => {
         pokemon.isUnlocked = unlockedPokemon.includes(pokemon.id);
     });
-    filterPokemon(
-        document.getElementById('nameFilter').value,
-        document.getElementById('typeFilter').value
-    );
+    
+    // Forzar actualización del filtro
+    const nameQuery = document.getElementById('nameFilter').value;
+    const typeQuery = document.getElementById('typeFilter').value;
+    filterPokemon(nameQuery, typeQuery);
 }
 
 //fecth de tipos para filtro
@@ -257,5 +268,17 @@ async function populateTypeFilter(){
     }
 }
 
-// Exponer función globalmente para integración
-window.updateUnlockedPokemon = updateUnlockedPokemon;
+function capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+// // Exponer función globalmente para integración
+// window.updateUnlockedPokemon = updateUnlockedPokemon;
+
+// // Escuchar cambios en el almacenamiento para actualizar en tiempo real
+// window.addEventListener('storage', (event) => {
+//     if (event.key === 'unlockedPokemon') {
+//         const newUnlocked = JSON.parse(event.newValue);
+//         updateUnlockedPokemon(newUnlocked);
+//     }
+// });

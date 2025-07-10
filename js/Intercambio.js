@@ -2,8 +2,14 @@
 // 👤 Identificación de usuario
 // ==========================
 const nombreUsuario = prompt("Ingresa tu nombre de entrenador:");
-const ably = new Ably.Realtime('wYro_w.Fh6czw:uQK_OF4aoqD4zmEd60jSXVJBrSHGXr6irLsleUwgHxM'); // ← Reemplaza con tu API Key válida
+const ably = new Ably.Realtime('uPeIQg.Vz7bow:8XwMy65DS1CXEyx7PKqm3MzKmHieUgPuEZ02RVFYb8g'); // ← API KEY de Norbelys
 const canal = ably.channels.get('intercambio-pokemon');
+
+// Funciones para LocalStorage
+function getUnlockedPokemonFromStorage() {
+    const data = localStorage.getItem('unlockedPokemon');
+    return data ? JSON.parse(data) : [];
+}
 
 // ==========================
 // 🌐 Estado de la aplicación
@@ -86,6 +92,17 @@ function verificarIntercambioListo() {
 }
 
 boton.addEventListener('click', () => {
+
+  // Obtener el array actual del localStorage
+  const unlockedPokemon = getUnlockedPokemonFromStorage();
+  
+  // Eliminar la carta entregada (por ID) y agregar la carta recibida (por ID)
+  const updatedPokemon = unlockedPokemon.filter(id => id !== cartaSeleccionadaPropia.id);
+  updatedPokemon.push(cartaSeleccionadaRemota.id);
+  
+  // Guardar el array actualizado en el localStorage
+  localStorage.setItem('unlockedPokemon', JSON.stringify(updatedPokemon));
+
   const mensaje = `${nombreUsuario} intercambió la carta #${cartaSeleccionadaPropia.id} por la carta #${cartaSeleccionadaRemota.id} de ${usuarioRemoto}. ¡Intercambio exitoso! 🔄`;
   canal.publish('intercambio-completo', mensaje);
   mostrarExito(mensaje);
@@ -111,6 +128,10 @@ function mostrarExito(texto) {
   document.body.appendChild(mensaje);
   setTimeout(() => mensaje.remove(), 6000);
 }
+
+
+
+
 
 fetch('components/Footer.html')
   .then(res => res.text())
