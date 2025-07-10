@@ -33,7 +33,7 @@ const VALID_POKEMON_IDS = Array.from({length: 150}, (_, i) => i + 1);
 // Función para obtener 5 IDs aleatorios (pueden ser repetidos)
 function getRandomPackIds() {
     const pack = [];
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 6; i++) {
         const idx = Math.floor(Math.random() * VALID_POKEMON_IDS.length);
         pack.push(VALID_POKEMON_IDS[idx]);
     }
