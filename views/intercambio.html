@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intercambio Pokémon</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/index.css">
+  <link rel="stylesheet" href="../css/Coleccion.css">
+  <link rel="stylesheet" href="../css/intercambio.css"> 
+  <link rel="stylesheet" href="../css/Footer.css">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="intercambio">
+  <main class="main-home">
+    <div class="intercambio-contenedor">
+      <h1 id="trade-status-title">Intercambio Pokémon</h1>
+      <p id="trade-status-subtitle">Selecciona hasta 5 cartas para ofrecer.</p>
+
+      <!-- Vista de Selección de Cartas -->
+      <div id="selection-view">
+        <div class="selection-layout">
+          <div class="selection-grid-wrapper">
+            <h2 class="subtitle">Tus Cartas</h2>
+            <div class="card-grid" id="cartas-propias">
+              <!-- Las cartas desbloqueadas se insertan aquí -->
+            </div>
+            <button id="propose-btn" class="boton" disabled>Proponer Intercambio</button>
+          </div>
+          <div class="trade-status-panel">
+            <h3 class="subtitle">Estado del Intercambio</h3>
+            <div id="trade-events">
+              <p>Esperando jugadores...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vista de Confirmación -->
+      <div id="confirmation-view" class="hidden">
+        <div class="trade-offer-container">
+          <div class="offer-side">
+            <h2 class="subtitle" id="local-user-name">Tu Oferta</h2>
+            <div id="local-offer-card" class="card-grid"></div>
+          </div>
+          <div class="trade-icon">🔄</div>
+          <div class="offer-side">
+            <h2 class="subtitle" id="remote-user-name">Oferta de...</h2>
+            <div id="remote-offer-card" class="card-grid"></div>
+          </div>
+        </div>
+        <div class="confirmation-buttons">
+          <button id="accept-btn" class="boton success">Aceptar</button>
+          <button id="decline-btn" class="boton danger">Rechazar</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal para detalles de Pokémon -->
+  <div id="pokemonModal" class="modal hidden">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div id="modalBody">
+            <!-- Contenido del modal -->
+        </div>
+    </div>
+  </div>
+
+  <div id="footer"></div>
+
+  <!-- Librerías -->
+  <script src="https://cdn.ably.io/lib/ably.min-1.js"></script>
+  <script src="../js/Intercambio.js"></script>
+</body>
+</html>

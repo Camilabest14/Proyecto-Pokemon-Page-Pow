@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     hideLoading();
     await populateTypeFilter();
 
-    fetch('components/Footer.html')
+    fetch('../components/Footer.html')
         .then(response => response.text())
         .then(data => {
             document.getElementById('footer').innerHTML = data;
