@@ -3,5 +3,8 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(response => response.text())
         .then(data => {
             document.getElementById('footer').innerHTML = data;
+        })
+        .catch(e => {
+            console.error('Error cargando el footer:', e);
         });
 });

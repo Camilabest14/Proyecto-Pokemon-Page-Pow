@@ -3,15 +3,29 @@ fetch('../components/Footer.html')
     .then(response => response.text())
     .then(data => {
         document.getElementById('footer').innerHTML = data;
+    })
+    .catch(e => {
+        console.error('Error cargando el footer:', e);
     });
 
 // Funciones para LocalStorage
 function getUnlockedPokemonFromStorage() {
-    const data = localStorage.getItem('unlockedPokemon');
-    return data ? JSON.parse(data) : [];
+    try {
+        const data = localStorage.getItem('unlockedPokemon');
+        return data ? JSON.parse(data) : [];
+    } catch (e) {
+        alert('Error accediendo a tus cartas guardadas.');
+        console.error('Error localStorage:', e);
+        return [];
+    }
 }
 function setUnlockedPokemonToStorage(ids) {
-    localStorage.setItem('unlockedPokemon', JSON.stringify(ids));
+    try {
+        localStorage.setItem('unlockedPokemon', JSON.stringify(ids));
+    } catch (e) {
+        alert('Error guardando tus cartas.');
+        console.error('Error localStorage:', e);
+    }
 }
 function updateUnlockedPokemon(newUnlockedIds) {
     setUnlockedPokemonToStorage(newUnlockedIds);
@@ -26,11 +40,10 @@ function unlockPokemon(pokemonId) {
     return false;
 }
 
-
 // array de IDs válidos (1-150)
 const VALID_POKEMON_IDS = Array.from({length: 150}, (_, i) => i + 1);
 
-// Función para obtener 5 IDs aleatorios (pueden ser repetidos)
+// Función para obtener 6 IDs aleatorios (pueden ser repetidos)
 function getRandomPackIds() {
     const pack = [];
     for (let i = 0; i < 6; i++) {
@@ -52,13 +65,20 @@ function showPackCards(ids) {
             // Evitar doble click
             if (card.classList.contains('flipped')) return;
             card.classList.add('flipped');
-            // Obtener datos del Pokémon
-            const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
-            const poke = await res.json();
-            card.innerHTML = `
-                <img class="poke-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png" alt="${poke.name}">
-                <div class="poke-name">${poke.name}</div>
-            `;
+            try {
+                // Obtener datos del Pokémon
+                const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+                if (!res.ok) throw new Error('No se pudo obtener el Pokémon');
+                const poke = await res.json();
+                card.innerHTML = `
+                    <img class="poke-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png" alt="${poke.name}">
+                    <div class="poke-name">${poke.name}</div>
+                `;
+            } catch (e) {
+                card.innerHTML = `<div class="poke-name" style="color:red;">Error</div>`;
+                alert('Error cargando la carta. Intenta de nuevo.');
+                console.error('Error cargando Pokémon:', e);
+            }
             card.removeEventListener('click', handleFlip);
         });
         row.appendChild(card);
@@ -69,15 +89,20 @@ function showPackCards(ids) {
 document.addEventListener('DOMContentLoaded', function() {
     const openBtn = document.getElementById('open-pack-btn');
     openBtn.addEventListener('click', function() {
-        const packIds = getRandomPackIds();
-        if (packIds.length === 0) {
-            document.getElementById('cards-row').innerHTML = '<div style="color:#8c52ff;font-weight:bold;">¡Ya tienes todos los Pokémon desbloqueados!</div>';
-            return;
+        try {
+            const packIds = getRandomPackIds();
+            if (packIds.length === 0) {
+                document.getElementById('cards-row').innerHTML = '<div style="color:#8c52ff;font-weight:bold;">¡Ya tienes todos los Pokémon desbloqueados!</div>';
+                return;
+            }
+            // Desbloquear los Pokémon del sobre
+            const unlocked = getUnlockedPokemonFromStorage();
+            const nuevos = [...unlocked, ...packIds];
+            updateUnlockedPokemon([...new Set(nuevos)]);
+            showPackCards(packIds);
+        } catch (e) {
+            alert('Error abriendo el sobre.');
+            console.error('Error al abrir sobre:', e);
         }
-        // Desbloquear los Pokémon del sobre
-        const unlocked = getUnlockedPokemonFromStorage();
-        const nuevos = [...unlocked, ...packIds];
-        updateUnlockedPokemon([...new Set(nuevos)]);
-        showPackCards(packIds);
     });
 });
