@@ -14,61 +14,61 @@
 </head>
 <body class="intercambio">
   <main class="main-home">
-    <div class="intercambio-contenedor">
+    <section class="intercambio-contenedor">
       <h1 id="trade-status-title">Intercambio Pokémon</h1>
       <p id="trade-status-subtitle">Selecciona hasta 5 cartas para ofrecer.</p>
 
       <!-- Vista de Selección de Cartas -->
-      <div id="selection-view">
+      <section id="selection-view">
         <div class="selection-layout">
-          <div class="selection-grid-wrapper">
+          <section class="selection-grid-wrapper">
             <h2 class="subtitle">Tus Cartas</h2>
-            <div class="card-grid" id="cartas-propias">
+            <section class="card-grid" id="cartas-propias">
               <!-- Las cartas desbloqueadas se insertan aquí -->
-            </div>
+            </section>
             <button id="propose-btn" class="boton" disabled>Proponer Intercambio</button>
-          </div>
-          <div class="trade-status-panel">
+          </section>
+          <aside class="trade-status-panel">
             <h3 class="subtitle">Estado del Intercambio</h3>
-            <div id="trade-events">
+            <section id="trade-events">
               <p>Esperando jugadores...</p>
-            </div>
-          </div>
+            </section>
+          </aside>
         </div>
-      </div>
+      </section>
 
       <!-- Vista de Confirmación -->
-      <div id="confirmation-view" class="hidden">
+      <section id="confirmation-view" class="hidden">
         <div class="trade-offer-container">
-          <div class="offer-side">
+          <section class="offer-side">
             <h2 class="subtitle" id="local-user-name">Tu Oferta</h2>
-            <div id="local-offer-card" class="card-grid"></div>
-          </div>
+            <section id="local-offer-card" class="card-grid"></section>
+          </section>
           <div class="trade-icon">🔄</div>
-          <div class="offer-side">
+          <section class="offer-side">
             <h2 class="subtitle" id="remote-user-name">Oferta de...</h2>
-            <div id="remote-offer-card" class="card-grid"></div>
-          </div>
+            <section id="remote-offer-card" class="card-grid"></section>
+          </section>
         </div>
         <div class="confirmation-buttons">
           <button id="accept-btn" class="boton success">Aceptar</button>
           <button id="decline-btn" class="boton danger">Rechazar</button>
         </div>
-      </div>
-    </div>
+      </section>
+    </section>
   </main>
 
   <!-- Modal para detalles de Pokémon -->
-  <div id="pokemonModal" class="modal hidden">
+  <section id="pokemonModal" class="modal hidden">
     <div class="modal-content">
         <span class="close">&times;</span>
         <div id="modalBody">
             <!-- Contenido del modal -->
         </div>
     </div>
-  </div>
+  </section>
 
-  <div id="footer"></div>
+  <footer id="footer"></footer>
 
   <!-- Librerías -->
   <script src="https://cdn.ably.io/lib/ably.min-1.js"></script>
