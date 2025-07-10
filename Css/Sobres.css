@@ -1,13 +1,21 @@
+.cards-container {
+    width: 100%;
+    overflow-x: auto;
+    padding: 1rem 0;
+    margin: 2rem 0;
+}
+
 .pack-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: 2rem;
 }
+
 .card-pack {
     background: linear-gradient(135deg, #ff66c4 60%, #8c52ff 100%);
     border-radius: 18px;
-    box-shadow: 0 4px 24px rgba(140,82,255,0.15);
+    box-shadow: 0 4px 24px rgba(140, 82, 255, 0.15);
     width: 220px;
     height: 320px;
     display: flex;
@@ -20,15 +28,18 @@
     margin-bottom: 1.2rem;
     position: relative;
 }
+
 .card-pack .pack-title {
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
     letter-spacing: 2px;
 }
+
 .card-pack .pack-desc {
     font-size: 1.1rem;
     margin-bottom: 0.5rem;
 }
+
 .open-pack-btn {
     padding: 0.8rem 2rem;
     font-size: 1.1rem;
@@ -40,46 +51,147 @@
     margin-top: 0.8rem;
     transition: background 0.2s;
 }
+
 .open-pack-btn:hover {
     background: #ff66c4;
 }
+
 .cards-row {
     display: flex;
+    gap: 1.5rem;
     justify-content: center;
-    gap: 1rem;
+    min-width: fit-content;
+    padding: 0 1rem;
     margin: 2rem 0 1rem 0;
 }
+
 .poke-card {
-    width: 90px;
-    height: 130px;
+    width: 150px;
+    height: 210px;
     background: #fff5fd;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px #8c52ff33;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(140, 82, 255, 0.2);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     position: relative;
-    transition: transform 0.2s;
+    transition: all 0.3s ease;
+    overflow: hidden;
     user-select: none;
 }
+
+.poke-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(140, 82, 255, 0.3);
+}
+
 .poke-card.flipped {
     background: #fff;
     flex-direction: column;
     cursor: default;
+    padding: 10px;
 }
+
 .poke-card .card-back {
-    font-size: 2.2rem;
+    font-size: 3.5rem;
     color: #ff66c4;
     font-family: 'Material Icons Outlined', sans-serif;
 }
+
 .poke-card .poke-img {
-    width: 60px;
+    width: 100px;
+    margin-bottom: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.poke-card .poke-name {
+    font-size: 1rem;
+    color: #8c52ff;
+    font-weight: 700;
+    text-align: center;
+    text-transform: capitalize;
+    background: #f8f5ff;
+    padding: 0.3rem 0.5rem;
+    border-radius: 8px;
+    width: 100%;
+}
+
+
+.header {
+    background: linear-gradient(135deg, #cc0000 0%, #a30000 100%);
+    color: white;
+    text-align: center;
+    padding: 1.5rem 1rem; /* Padding reducido */
+    border-bottom: 5px solid #ffde00;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 0; /* Asegura que no añade espacio extra */
+}
+
+.header h1 {
+    font-size: 2rem; /* Tamaño más estándar */
+    margin: 0 0 0.5rem 0;
+    text-shadow: 
+        2px 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+.header h1 i {
+    color: #ffde00;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.header p {
+    font-size: 1.1rem;
+    margin: 0 auto;
+    max-width: 600px;
+    line-height: 1.5;
+}
+
+
+/* Nuevos estilos para estadísticas */
+.stats-container {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 1.5rem auto; /* Centrado vertical y horizontal */
+    max-width: 600px; /* Ancho máximo para mejor distribución */
+    flex-wrap: wrap;
+}
+
+.stat-card {
+    background: #f8f5ff;
+    border-radius: 12px;
+    padding: 1.2rem 2rem; /* Más padding horizontal */
+    box-shadow: 0 4px 12px rgba(140, 82, 255, 0.1);
+    min-width: 180px; /* Más ancho para mejor visualización */
+    transition: transform 0.3s ease;
+    flex: 1; /* Ocupar espacio disponible equitativamente */
+}
+
+/* Resto de estilos permanece igual... */
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-card i {
+    font-size: 1.8rem;
+    color: #8c52ff;
+    margin-bottom: 0.8rem;
+    display: block;
+}
+
+.stat-card span {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ff66c4;
+    display: block;
     margin-bottom: 0.3rem;
 }
-.poke-card .poke-name {
-    font-size: 0.95rem;
-    color: #8c52ff;
-    font-weight: bold;
-    text-transform: capitalize;
+
+.stat-card p {
+    font-size: 0.9rem;
+    color: #6c5ce7;
+    margin: 0;
 }

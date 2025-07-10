@@ -11,6 +11,27 @@
 </head>
 <body>
     <main class="main-sobres" style="text-align:center; margin-top:60px;">
+
+        <!-- Header -->
+        <header class="header">
+            <h1><i class="fas fa-bolt"></i> Pokémon TCG Pack Opener</h1>
+            <p>Descubre cartas épicas y colecciona tus Pokémon favoritos</p>
+        </header>
+
+        <!-- Añadido: Sección de estadísticas -->
+        <div id="stats-container" class="stats-container">
+            <div class="stat-card">
+                <i class="fas fa-lock-open"></i>
+                <span id="unlocked-count">0</span>
+                <p>Cartas desbloqueadas</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-trophy"></i>
+                <span id="completion">0%</span>
+                <p>Completado</p>
+            </div>
+        </div>
+
         <div class="pack-container">
             <div class="card-pack">
                 <div class="pack-title">Pokémon TCG</div>
@@ -19,19 +40,10 @@
                     <i class="fas fa-gift"></i> Abrir Sobre
                 </button>
             </div>
-            <div id="cards-row" class="cards-row"></div>
+            <div id="cards-container" class="cards-container">
+                <div id="cards-row" class="cards-row"></div>
+            </div>
         </div>
-        <!-- Debug buttons -->
-        <button id="unlock-btn" style="padding:1rem 2rem; font-size:1.2rem; border-radius:12px; background:var(--primary,#ff66c4); color:white; border:none; cursor:pointer;">
-            <i class="fas fa-gift"></i> Desbloquear Pokémon
-        </button>
-        <button id="block-btn" style="padding:1rem 2rem; font-size:1.2rem; border-radius:12px; background:#8c52ff; color:white; border:none; cursor:pointer;">
-            <i class="fas fa-lock"></i> Bloquear Bulbasaur
-        </button>
-        <button id="block-all-btn" style="padding:1rem 2rem; font-size:1.2rem; border-radius:12px; background:#ff914d; color:white; border:none; cursor:pointer;">
-            <i class="fas fa-ban"></i> Bloquear Todos
-        </button>
-        <div id="result" style="margin-top:1.5rem; font-size:1.1rem;"></div>
     </main>
     <div id="footer"></div>
     <script src="Js/Sobres.js"></script>
