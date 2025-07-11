@@ -1,3 +1,45 @@
+body {
+    background: linear-gradient(-45deg, #8c52ff, #ff914d, #ffde59, #ff66c4);
+    background-size: 400% 400%;
+    animation: gradientMove 10s ease infinite;
+    padding-bottom: 80px;
+}
+
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.subtitle {
+    color: #8c52ff;
+    margin-bottom: 2rem;
+    font-size: 1.2rem;
+    overflow: hidden;
+    border-right: .15em solid #ff66c4;
+    white-space: nowrap;
+    animation: typing 3s steps(40, end), blink .75s step-end infinite;
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes blink {
+    from, to { border-color: transparent }
+    50% { border-color: #ff66c4; }
+}
+
+
+
+
 /* --- Contenedor principal de la página de inicio --- */
 .main-home {
     max-width: 500px; /* Limitar ancho máximo */
@@ -108,5 +150,21 @@
     }
     .home-pokemon-img {
         width: 80px; /* Imagen más pequeña */
+    }
+}
+/* --- Animación de Pikachu --- */
+.home-pokemon-img {
+    width: 120px;
+    margin-top: 1.5rem;
+    filter: drop-shadow(0 2px 8px #ff66c4aa);
+    animation: bounce 2s infinite ease-in-out;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
     }
 }
