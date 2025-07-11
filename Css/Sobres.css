@@ -2,12 +2,14 @@ body {
     background: linear-gradient(90deg, #8c52ff, #ff914d);
     padding-bottom: 80px;
 }
+
 .pack-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: 2rem;
 }
+
 .card-pack {
     background: linear-gradient(135deg, #ff66c4 60%, #8c52ff 100%);
     border-radius: 18px;
@@ -24,15 +26,18 @@ body {
     margin-bottom: 1.2rem;
     position: relative;
 }
+
 .card-pack .pack-title {
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
     letter-spacing: 2px;
 }
+
 .card-pack .pack-desc {
     font-size: 1.1rem;
     margin-bottom: 0.5rem;
 }
+
 .open-pack-btn {
     padding: 0.8rem 2rem;
     font-size: 1.1rem;
@@ -44,15 +49,19 @@ body {
     margin-top: 0.8rem;
     transition: background 0.2s;
 }
+
 .open-pack-btn:hover {
     background: #ff66c4;
 }
+
 .cards-row {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap; /* Para que se ajusten en pantallas pequeñas */
     gap: 1rem;
     margin: 2rem 0 1rem 0;
 }
+
 .poke-card {
     width: 90px;
     height: 130px;
@@ -67,23 +76,97 @@ body {
     transition: transform 0.2s;
     user-select: none;
 }
+
 .poke-card.flipped {
     background: #fff;
     flex-direction: column;
     cursor: default;
 }
+
 .poke-card .card-back {
     font-size: 2.2rem;
     color: #ff66c4;
     font-family: 'Material Icons Outlined', sans-serif;
 }
+
 .poke-card .poke-img {
     width: 60px;
     margin-bottom: 0.3rem;
 }
+
 .poke-card .poke-name {
     font-size: 0.95rem;
     color: #8c52ff;
     font-weight: bold;
     text-transform: capitalize;
+}
+
+/* 📱 Responsive - Teléfonos pequeños (<= 480px) */
+@media (max-width: 480px) {
+    .card-pack {
+        width: 160px;
+        height: 240px;
+        font-size: 1.1rem;
+    }
+    .card-pack .pack-title {
+        font-size: 1.3rem;
+    }
+    .card-pack .pack-desc {
+        font-size: 1rem;
+    }
+    .open-pack-btn {
+        padding: 0.6rem 1.5rem;
+        font-size: 1rem;
+    }
+    .poke-card {
+        width: 70px;
+        height: 100px;
+    }
+    .poke-card .poke-img {
+        width: 50px;
+    }
+    .poke-card .poke-name {
+        font-size: 0.8rem;
+    }
+}
+
+/* 📱 Responsive - Teléfonos medianos (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+    .card-pack {
+        width: 180px;
+        height: 260px;
+        font-size: 1.2rem;
+    }
+    .card-pack .pack-title {
+        font-size: 1.4rem;
+    }
+    .card-pack .pack-desc {
+        font-size: 1.05rem;
+    }
+    .open-pack-btn {
+        padding: 0.7rem 1.7rem;
+        font-size: 1.05rem;
+    }
+    .poke-card {
+        width: 80px;
+        height: 110px;
+    }
+    .poke-card .poke-img {
+        width: 55px;
+    }
+    .poke-card .poke-name {
+        font-size: 0.9rem;
+    }
+}
+
+/* 💻 Responsive - Tablets grandes y pantallas medianas (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .card-pack {
+        width: 200px;
+        height: 300px;
+    }
+    .open-pack-btn {
+        padding: 0.8rem 2rem;
+        font-size: 1.1rem;
+    }
 }
