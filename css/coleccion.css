@@ -22,7 +22,8 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    background: var(--light-bg);
+    background: linear-gradient(90deg, #8c52ff, #ff914d);
+    padding-bottom: 80px;
     padding: 20px 10px;
     color: var(--gray-900);
 }
