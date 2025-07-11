@@ -189,16 +189,21 @@ body.intercambio {
   margin: 0 auto 1rem auto;
   display: block;
   z-index: 2;
+  /* Evita que quede muy cerca del borde inferior */
+  margin-bottom: 1rem;
 }
 
+/* Responsive para pantallas pequeñas */
 @media screen and (max-width: 600px) {
   #propose-btn {
-    position: fixed;
-    bottom: 16px;
+    position: fixed; /* Se mantiene fijo en móviles */
+    bottom: 80px; /* Aumenta la distancia para evitar que se tape */
     left: 50%;
     transform: translateX(-50%);
     width: 90vw;
     max-width: 400px;
     z-index: 1000;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); /* Sombra para destacar */
   }
 }
+
