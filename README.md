@@ -28,5 +28,3 @@ Esta aplicación web permite a los usuarios coleccionar, visualizar, abrir sobre
 
 ---
 
-**Nota:**  
-El proyecto utiliza HTML5 semántico, reemplazando `<div>` por etiquetas como `<section>`, `<article>`, `<header>`, `<nav>`, `<main>`, `<footer>`, y `<figure>` para mejorar la accesibilidad y estructura
