@@ -36,6 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('pokemonModal');
     const modalBody = document.getElementById('modalBody');
     const closeModalBtn = document.querySelector('.close');
+    const remoteCardsContainer = document.getElementById('cartas-remotas');
+    const remoteUserLabel = document.getElementById('remote-user-label');
 
     // --- FUNCIONES DE LÓGICA ---
 
@@ -87,6 +89,13 @@ document.addEventListener('DOMContentLoaded', () => {
             localOffer.cardIds = localOffer.cardIds.filter(cardId => cardId !== id);
         }
         proposeBtn.disabled = localOffer.cardIds.length === 0;
+
+        // Enviar selección actual al canal
+        try {
+            channel.publish('selecting', { userId, cardIds: localOffer.cardIds });
+        } catch (e) {
+            console.error('Error enviando selección:', e);
+        }
     }
 
     function proposeTrade() {
@@ -258,6 +267,34 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Error en evento execute:', e);
         }
     });
+
+    // Escuchar selección del otro usuario
+    channel.subscribe('selecting', (msg) => {
+        try {
+            if (msg.data.userId === userId) return;
+            remoteOffer.userId = msg.data.userId;
+            remoteOffer.cardIds = msg.data.cardIds;
+            renderRemoteSelection();
+        } catch (e) {
+            console.error('Error recibiendo selección:', e);
+        }
+    });
+
+    function renderRemoteSelection() {
+        if (!remoteCardsContainer) return;
+        remoteCardsContainer.innerHTML = '';
+        remoteUserLabel.textContent = remoteOffer.userId
+            ? `Cartas de ${remoteOffer.userId} seleccionadas`
+            : 'Cartas del otro usuario';
+        if (remoteOffer.cardIds.length === 0) {
+            remoteCardsContainer.innerHTML = '<p>No ha seleccionado cartas.</p>';
+            return;
+        }
+        remoteOffer.cardIds.forEach(id => {
+            const card = createCardElement(id, false);
+            remoteCardsContainer.appendChild(card);
+        });
+    }
 
     // --- EVENT LISTENERS DEL DOM ---
     proposeBtn.addEventListener('click', proposeTrade);

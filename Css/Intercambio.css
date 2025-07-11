@@ -132,3 +132,10 @@ body.intercambio {
 .boton.danger:hover { 
   background-color: #c82333; 
 }
+
+.remote-selection-panel .carta {
+  opacity: 0.7;
+  border: 2px dashed #8c52ff;
+  background: #fff;
+  color: #333;
+}
