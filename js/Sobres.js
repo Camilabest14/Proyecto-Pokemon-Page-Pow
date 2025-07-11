@@ -133,3 +133,38 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
+function showPackCards(ids) {
+    const row = document.getElementById('cards-row');
+    row.innerHTML = ''; // Limpiar anteriores
+
+    ids.forEach((id, index) => {
+        const card = document.createElement('div');
+        card.className = 'poke-card';
+        card.style.animationDelay = `${index * 0.1}s`; // Retraso progresivo
+        card.innerHTML = `<span class="card-back">🃏</span>`;
+
+        card.addEventListener('click', async function handleFlip() {
+            if (card.classList.contains('flipped')) return; // Evitar doble click
+            card.classList.add('flipped');
+
+            try {
+                const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+                if (!res.ok) throw new Error('No se pudo obtener el Pokémon');
+                const poke = await res.json();
+                card.innerHTML = `
+                    <img class="poke-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png" alt="${poke.name}">
+                    <div class="poke-name">${poke.name}</div>
+                `;
+            } catch (e) {
+                card.innerHTML = `<div class="poke-name" style="color:red;">Error</div>`;
+                alert('Error cargando la carta. Intenta de nuevo.');
+                console.error('Error cargando Pokémon:', e);
+            }
+
+            card.removeEventListener('click', handleFlip);
+        });
+
+        row.appendChild(card);
+    });
+}
