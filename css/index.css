@@ -17,29 +17,6 @@ body {
     }
 }
 
-.subtitle {
-    color: #8c52ff;
-    margin-bottom: 2rem;
-    font-size: 1.2rem;
-    overflow: hidden;
-    border-right: .15em solid #ff66c4;
-    white-space: nowrap;
-    animation: typing 3s steps(40, end), blink .75s step-end infinite;
-}
-
-@keyframes typing {
-    from { width: 0 }
-    to { width: 100% }
-}
-
-@keyframes blink {
-    from, to { border-color: transparent }
-    50% { border-color: #ff66c4; }
-}
-
-
-
-
 /* --- Contenedor principal de la página de inicio --- */
 .main-home {
     max-width: 500px; /* Limitar ancho máximo */
