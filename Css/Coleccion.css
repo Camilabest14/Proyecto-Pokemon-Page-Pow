@@ -250,9 +250,19 @@ body {
         grid-template-columns: repeat(10, 1fr);
         gap: 12px;
     }
-    
     .pokemon-card .name {
         font-size: 12px;
         padding: 10px 4px;
+    }
+}
+
+/* Alta resolución */
+@media (min-resolution: 192dpi) {
+    .pokemon-card {
+        transition: transform 0.3s ease;
+    }
+
+    .pokemon-card:hover {
+        transform: scale(1.05);
     }
 }
