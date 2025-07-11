@@ -1,11 +1,15 @@
-<!DOCTYPE html>
+<!DOCTYPE html> <!-- Documento HTML5 -->
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abrir Sobres - Pokémon TCG</title>
+
+    <!-- Estilos principales -->
     <link rel="stylesheet" href="/Proyecto-Pokemon-Page-Pow/css/sobres.css">
     <link rel="stylesheet" href="/Proyecto-Pokemon-Page-Pow/css/footer.css">
+
+    <!-- Fuentes e iconos -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -17,14 +21,19 @@
                     <h1 class="pack-title">Pokémon TCG</h1>
                     <p class="pack-desc">6 cartas</p>
                 </header>
+                <!-- Botón para abrir un sobre -->
                 <button id="open-pack-btn" class="open-pack-btn">
                     <i class="fas fa-gift"></i> Abrir Sobre
                 </button>
             </article>
+            <!-- Contenedor para mostrar las cartas obtenidas -->
             <section id="cards-row" class="cards-row" aria-label="Cartas"></section>
         </section>
     </main>
+
     <footer id="footer"></footer>
+
+    <!-- Script principal -->
     <script src="/Proyecto-Pokemon-Page-Pow/js/Sobres.js"></script>
 </body>
 </html>

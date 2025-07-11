@@ -3,12 +3,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const ABLY_API_KEY = 'wYro_w.Fh6czw:uQK_OF4aoqD4zmEd60jSXVJBrSHGXr6irLsleUwgHxM';
     let userId = '';
     try {
+        // Obtener nombre del usuario o asignar uno por defecto
         userId = prompt("Ingresa tu nombre de entrenador:") || `Entrenador_${Math.floor(Math.random() * 1000)}`;
     } catch (e) {
         userId = `Entrenador_${Math.floor(Math.random() * 1000)}`;
         alert('No se pudo obtener el nombre de usuario. Se asignará uno por defecto.');
     }
 
+    // Inicializar Ably y canal de intercambio
     let ably, channel;
     try {
         ably = new Ably.Realtime(ABLY_API_KEY);
@@ -19,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
+    // Estado de las ofertas
     let localOffer = { cardIds: [], hasAccepted: false, hasProposed: false };
     let remoteOffer = { cardIds: [], hasAccepted: false, userId: null, hasProposed: false };
     let tradeInProgress = false;
@@ -39,8 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const remoteCardsContainer = document.getElementById('cartas-remotas');
     const remoteUserLabel = document.getElementById('remote-user-label');
 
-    // --- FUNCIONES DE LÓGICA ---
+    // --- FUNCIONES PRINCIPALES ---
 
+    // Cargar cartas desbloqueadas del usuario
     function loadUserCards() {
         let unlockedIds = [];
         try {
@@ -56,17 +60,20 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         unlockedIds.forEach(id => {
-            const cardElement = createCardElement(id, false); // Not in confirmation view
+            const cardElement = createCardElement(id, false);
             cardElement.addEventListener('click', () => selectCard(id, cardElement));
             ownCardsContainer.appendChild(cardElement);
         });
     }
 
+    // Crear elemento HTML para una carta
     function createCardElement(id, isConfirmationCard) {
         const div = document.createElement('div');
         div.className = 'carta';
         div.dataset.id = id;
-        div.innerHTML = `<img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png" alt="Pokémon ${id}"><div class="name">#${id}</div>`;
+        div.innerHTML = `
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png" alt="Pokémon ${id}">
+            <div class="name">#${id}</div>`;
         if (isConfirmationCard) {
             div.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -76,6 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return div;
     }
 
+    // Seleccionar o quitar selección de una carta
     function selectCard(id, element) {
         const isSelected = element.classList.contains('seleccionada');
         if (!isSelected && localOffer.cardIds.length >= 5) {
@@ -98,6 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Proponer un intercambio al otro jugador
     function proposeTrade() {
         if (localOffer.cardIds.length === 0) return;
         localOffer.hasProposed = true;
@@ -111,6 +120,8 @@ document.addEventListener('DOMContentLoaded', () => {
         statusSubtitle.textContent = '¡Propuesta enviada! Esperando al otro jugador...';
         tradeEventsContainer.innerHTML = `<p><strong>Tú:</strong> Propusiste ${localOffer.cardIds.length} carta(s).</p>`;
         proposeBtn.disabled = true;
+
+        // Si ambos han propuesto, iniciar confirmación
         if (remoteOffer.hasProposed) {
             try {
                 channel.publish('start-confirmation', {});
@@ -121,12 +132,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Mostrar la vista de confirmación de intercambio
     function showConfirmationView() {
         selectionView.classList.add('hidden');
         confirmationView.classList.remove('hidden');
         statusTitle.textContent = 'Confirmar Intercambio';
         statusSubtitle.textContent = 'Ambos jugadores deben aceptar para completar el intercambio.';
 
+        // Mostrar cartas propias y del otro jugador
         document.getElementById('local-user-name').textContent = `Tu Oferta (${userId})`;
         const localCardContainer = document.getElementById('local-offer-card');
         localCardContainer.innerHTML = '';
@@ -138,6 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
         remoteOffer.cardIds.forEach(id => remoteCardContainer.appendChild(createCardElement(id, true)));
     }
 
+    // Ejecutar el intercambio y actualizar almacenamiento
     function executeTrade() {
         if (tradeInProgress) return; // Evita la ejecución doble
         tradeInProgress = true;
@@ -150,20 +164,25 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Error localStorage:', e);
             unlockedIds = [];
         }
+
+        // Quitar cartas ofrecidas y agregar las recibidas
         unlockedIds = unlockedIds.filter(id => !localOffer.cardIds.includes(id));
         remoteOffer.cardIds.forEach(receivedId => {
             if (!unlockedIds.includes(receivedId)) unlockedIds.push(receivedId);
         });
+
         try {
             localStorage.setItem('unlockedPokemon', JSON.stringify(unlockedIds));
         } catch (e) {
             alert('Error guardando tus cartas después del intercambio.');
             console.error('Error localStorage:', e);
         }
+
         alert(`¡Intercambio exitoso!`);
         resetTrade();
     }
 
+    // Resetear el estado del intercambio
     function resetTrade() {
         localOffer = { cardIds: [], hasAccepted: false, hasProposed: false };
         remoteOffer = { cardIds: [], hasAccepted: false, userId: null, hasProposed: false };
@@ -187,23 +206,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
             if (!response.ok) throw new Error('No se pudo obtener el Pokémon');
             const pokemon = await response.json();
-            const statNamesES = {};
-            await Promise.all(
-                pokemon.stats.map(async statObj => {
-                    const statRes = await fetch(statObj.stat.url);
-                    if (!statRes.ok) throw new Error('No se pudo obtener la estadística');
-                    const statData = await statRes.json();
-                    const esNameObj = statData.names.find(n => n.language.name === "es");
-                    statNamesES[statObj.stat.name] = esNameObj ? esNameObj.name : statObj.stat.name;
-                })
-            );
             modalBody.innerHTML = `
                 <div class="pokemon-detail">
                     <img src="${pokemon.sprites.other['official-artwork'].front_default || pokemon.sprites.front_default}" alt="${pokemon.name}">
                     <h2>${pokemon.name}</h2>
-                    <div class="pokemon-types">${pokemon.types.map(type => `<span class="type-badge type-${type.type.name}">${type.type.name}</span>`).join('')}</div>
-                    <div class="pokemon-stats"><h3>Estadísticas Base:</h3>${pokemon.stats.map(stat => `<div class="stat-item"><span>${statNamesES[stat.stat.name]}:</span><strong>${stat.base_stat}</strong></div>`).join('')}</div>
-                    <p><strong>Altura:</strong> ${pokemon.height / 10} m</p><p><strong>Peso:</strong> ${pokemon.weight / 10} kg</p>
+                    <div class="pokemon-types">
+                        ${pokemon.types.map(type => `<span class="type-badge type-${type.type.name}">${type.type.name}</span>`).join('')}
+                    </div>
+                    <p><strong>Altura:</strong> ${pokemon.height / 10} m</p>
+                    <p><strong>Peso:</strong> ${pokemon.weight / 10} kg</p>
                 </div>`;
         } catch (error) {
             modalBody.innerHTML = '<div class="error">Error cargando detalles</div>';
@@ -212,7 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     function closeModal() { modal.classList.add('hidden'); }
 
-    // --- MANEJO DE EVENTOS DE WEBSOCKET ---
+    // --- SUBSCRIPCIONES A EVENTOS WEBSOCKET ---
     channel.subscribe('propose', (msg) => {
         try {
             if (msg.data.userId === userId) return;
@@ -259,6 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Error en evento decline:', e);
         }
     });
+
     channel.subscribe('execute', () => {
         try {
             executeTrade();
@@ -268,7 +280,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Escuchar selección del otro usuario
     channel.subscribe('selecting', (msg) => {
         try {
             if (msg.data.userId === userId) return;
@@ -280,6 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Mostrar selección actual del otro jugador
     function renderRemoteSelection() {
         if (!remoteCardsContainer) return;
         remoteCardsContainer.innerHTML = '';
@@ -303,11 +315,9 @@ document.addEventListener('DOMContentLoaded', () => {
         acceptBtn.disabled = true;
         acceptBtn.textContent = 'Esperando...';
         try {
-            // Only the player who accepts second will publish the 'execute' message.
             if (remoteOffer.hasAccepted) {
                 channel.publish('execute', {});
             } else {
-                // If the other player hasn't accepted yet, just publish your own acceptance.
                 channel.publish('accept', { userId });
             }
         } catch (e) {

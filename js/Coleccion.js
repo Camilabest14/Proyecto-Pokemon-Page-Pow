@@ -1,9 +1,9 @@
-// Datos globales
-let allPokemon = [];
-let filteredPokemon = [];
+// --- Datos globales ---
+let allPokemon = [];          // Lista completa de Pokémon
+let filteredPokemon = [];     // Lista filtrada según búsqueda/filtros
+let unlockedPokemon = getUnlockedPokemonFromStorage(); // IDs desbloqueados desde LocalStorage
 
-let unlockedPokemon = getUnlockedPokemonFromStorage();
-
+// --- LocalStorage: obtener y guardar ---
 function getUnlockedPokemonFromStorage() {
     try {
         const data = localStorage.getItem('unlockedPokemon');
@@ -24,21 +24,22 @@ function setUnlockedPokemonToStorage(ids) {
     }
 }
 
-// Inicialización
+// --- Inicialización principal ---
 document.addEventListener('DOMContentLoaded', async () => {
     try {
-        showLoading();
-        await loadPokemonData();
-        renderPokemonGrid();
-        setupEventListeners();
-        hideLoading();
-        await populateTypeFilter();
+        showLoading();                      // Mostrar pantalla de carga
+        await loadPokemonData();            // Cargar datos de los 150 Pokémon
+        renderPokemonGrid();                // Renderizar el grid
+        setupEventListeners();              // Configurar eventos (filtros, modal)
+        hideLoading();                      // Ocultar pantalla de carga
+        await populateTypeFilter();         // Rellenar filtro de tipos
     } catch (e) {
         showError('Error inicializando la colección.');
         console.error('Error inicialización:', e);
         hideLoading();
     }
 
+    // Cargar footer dinámicamente
     fetch('../components/Footer.html')
         .then(response => response.text())
         .then(data => {
@@ -49,14 +50,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
 });
 
-// Cargar datos de Pokémon (optimizado)
+// --- Cargar datos básicos de Pokémon ---
 async function loadPokemonData() {
     try {
-        // Cargar lista básica de 150 Pokémon
         const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=150');
         if (!response.ok) throw new Error('No se pudo obtener la lista de Pokémon');
         const data = await response.json();
 
+        // Mapear la lista con IDs y estado de desbloqueo
         allPokemon = data.results.map((pokemon, index) => ({
             id: index + 1,
             name: pokemon.name,
@@ -64,14 +65,14 @@ async function loadPokemonData() {
             isUnlocked: unlockedPokemon.includes(index + 1)
         }));
 
-        filteredPokemon = [...allPokemon];
+        filteredPokemon = [...allPokemon]; // Inicialmente todos
     } catch (error) {
         console.error('Error cargando Pokémon:', error);
         showError('Error cargando los datos. Verifica tu conexión.');
     }
 }
 
-// Renderizar grid
+// --- Renderizar el grid de Pokémon ---
 function renderPokemonGrid() {
     const grid = document.getElementById('pokemonGrid');
     if (!grid) {
@@ -86,7 +87,7 @@ function renderPokemonGrid() {
     });
 }
 
-// Crear carta individual
+// --- Crear elemento para cada carta ---
 function createPokemonCard(pokemon) {
     const card = document.createElement('div');
     card.className = `pokemon-card ${pokemon.isUnlocked ? 'unlocked' : 'locked'}`;
@@ -109,7 +110,7 @@ function createPokemonCard(pokemon) {
     return card;
 }
 
-// Abrir modal con detalles
+// --- Abrir modal con detalles de un Pokémon ---
 async function openPokemonModal(pokemonId) {
     const modal = document.getElementById('pokemonModal');
     const modalBody = document.getElementById('modalBody');
@@ -122,7 +123,7 @@ async function openPokemonModal(pokemonId) {
         if (!response.ok) throw new Error('No se pudo obtener el Pokémon');
         const pokemon = await response.json();
 
-        // stats en ES
+        // Traducir stats al español
         const statNamesES = {};
         await Promise.all(
             pokemon.stats.map(async statObj => {
@@ -134,18 +135,17 @@ async function openPokemonModal(pokemonId) {
             })
         );
 
+        // Renderizar detalles en el modal
         modalBody.innerHTML = `
             <div class="pokemon-detail">
                 <img src="${pokemon.sprites.other['official-artwork'].front_default || pokemon.sprites.front_default}" 
                      alt="${pokemon.name}">
                 <h2>${pokemon.name}</h2>
-                
                 <div class="pokemon-types">
                     ${pokemon.types.map(type => 
                         `<span class="type-badge type-${type.type.name}">${type.type.name}</span>`
                     ).join('')}
                 </div>
-                
                 <div class="pokemon-stats">
                     <h3>Estadísticas Base:</h3>
                     ${pokemon.stats.map(stat => `
@@ -155,7 +155,6 @@ async function openPokemonModal(pokemonId) {
                         </div>
                     `).join('')}
                 </div>
-                
                 <p><strong>Altura:</strong> ${pokemon.height / 10} m</p>
                 <p><strong>Peso:</strong> ${pokemon.weight / 10} kg</p>
             </div>
@@ -167,47 +166,37 @@ async function openPokemonModal(pokemonId) {
     }
 }
 
-// Configurar event listeners
+// --- Configurar listeners (filtros, cierre modal, teclado) ---
 function setupEventListeners() {
-    // Filtro por nombre
     document.getElementById('nameFilter').addEventListener('input', (e) => {
         filterPokemon(e.target.value, document.getElementById('typeFilter').value);
     });
-
-    // Filtro por tipo
     document.getElementById('typeFilter').addEventListener('change', (e) => {
         filterPokemon(document.getElementById('nameFilter').value, e.target.value);
     });
-
-    // Cerrar modal
     document.querySelector('.close').addEventListener('click', closeModal);
     document.getElementById('pokemonModal').addEventListener('click', (e) => {
         if (e.target.id === 'pokemonModal') closeModal();
     });
-
-    // Cerrar modal con ESC
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeModal();
     });
 }
 
-// Filtrar Pokémon (VERSIÓN MEJORADA)
+// --- Filtrar Pokémon por nombre y tipo ---
 async function filterPokemon(nameQuery, typeQuery) {
     showLoading();
 
     if (!typeQuery) {
-        // Solo filtro por nombre
         filteredPokemon = allPokemon.filter(pokemon =>
             pokemon.name.toLowerCase().includes(nameQuery.toLowerCase())
         );
     } else {
-        // Necesitamos cargar los tipos para cada Pokémon
         filteredPokemon = [];
 
+        // Filtrar por nombre y tipo
         for (const pokemon of allPokemon) {
-            if (!pokemon.name.toLowerCase().includes(nameQuery.toLowerCase())) {
-                continue;
-            }
+            if (!pokemon.name.toLowerCase().includes(nameQuery.toLowerCase())) continue;
 
             try {
                 const response = await fetch(pokemon.url);
@@ -216,10 +205,7 @@ async function filterPokemon(nameQuery, typeQuery) {
                 const types = data.types.map(t => t.type.name);
 
                 if (types.includes(typeQuery)) {
-                    filteredPokemon.push({
-                        ...pokemon,
-                        types: types // Guardamos los tipos para futuras consultas
-                    });
+                    filteredPokemon.push({ ...pokemon, types });
                 }
             } catch (error) {
                 console.error(`Error cargando ${pokemon.name}:`, error);
@@ -231,12 +217,12 @@ async function filterPokemon(nameQuery, typeQuery) {
     hideLoading();
 }
 
-// Cerrar modal
+// --- Modal: cerrar ---
 function closeModal() {
     document.getElementById('pokemonModal').classList.add('hidden');
 }
 
-// Utilidades
+// --- Utilidades ---
 function showLoading() {
     if (!document.getElementById('loading')) {
         document.body.insertAdjacentHTML('beforeend',
@@ -244,17 +230,15 @@ function showLoading() {
         );
     }
 }
-
 function hideLoading() {
     const loading = document.getElementById('loading');
     if (loading) loading.remove();
 }
-
 function showError(message) {
-    alert(message); // En producción usar algo más elegante
+    alert(message); // (En producción puede usarse un toast o modal)
 }
 
-// Función para que el Integrante A pueda actualizar cartas desbloqueadas
+// Actualizar lista de desbloqueados y refrescar grid
 function updateUnlockedPokemon(newUnlockedIds) {
     unlockedPokemon = newUnlockedIds;
     setUnlockedPokemonToStorage(unlockedPokemon);
@@ -267,15 +251,14 @@ function updateUnlockedPokemon(newUnlockedIds) {
     );
 }
 
-//fecth de tipos para filtro
+// --- Cargar tipos para el filtro ---
 async function populateTypeFilter() {
     const select = document.getElementById('typeFilter');
     try {
         const response = await fetch('https://pokeapi.co/api/v2/type');
         if (!response.ok) throw new Error('No se pudo obtener la lista de tipos');
         const data = await response.json();
-        const typeResults = data.results;
-        for (const type of typeResults) {
+        for (const type of data.results) {
             try {
                 const typeResponse = await fetch(type.url);
                 if (!typeResponse.ok) throw new Error('No se pudo obtener el tipo');
@@ -296,10 +279,10 @@ async function populateTypeFilter() {
     }
 }
 
-// Exponer función globalmente para integración
+// --- Exponer función globalmente ---
 window.updateUnlockedPokemon = updateUnlockedPokemon;
 
-// Utilidad para capitalizar
+// --- Capitalizar nombres ---
 function capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }

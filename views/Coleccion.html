@@ -1,16 +1,20 @@
-<!DOCTYPE html>
+<!DOCTYPE html> <!-- Documento HTML5 -->
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokémon TCG Collection</title>
+
+    <!-- Estilos principales -->
     <link rel="stylesheet" href="/Proyecto-Pokemon-Page-Pow/css/coleccion.css">
     <link rel="stylesheet" href="/Proyecto-Pokemon-Page-Pow/css/footer.css">
+
+    <!-- Fuentes e iconos -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <!-- Filtros -->
+    <!-- Filtros para búsqueda y tipo -->
     <section class="filters">
         <input type="text" id="nameFilter" placeholder="Buscar Pokémon...">
         <select id="typeFilter">
@@ -18,12 +22,12 @@
         </select>
     </section>
 
-    <!-- Grid de Pokémon -->
+    <!-- Grid principal donde se muestran las cartas -->
     <section id="pokemonGrid" class="pokemon-grid">
-        <!-- Se genera dinámicamente -->
+        <!-- Las cartas se generan dinámicamente con JS -->
     </section>
 
-    <!-- Modal -->
+    <!-- Modal para mostrar detalles del Pokémon -->
     <section id="pokemonModal" class="modal hidden">
         <section class="modal-content">
             <button class="close" aria-label="Cerrar">&times;</button>
@@ -34,6 +38,8 @@
     </section>
 
     <footer id="footer"></footer>
+
+    <!-- Script principal -->
     <script src="/Proyecto-Pokemon-Page-Pow/js/Coleccion.js"></script>
 </body>
 </html>

@@ -1,14 +1,18 @@
-<!DOCTYPE html>
+<!DOCTYPE html> <!-- Documento HTML5 -->
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Intercambio Pokémon</title>
+
+  <!-- Estilos principales -->
   <link rel="stylesheet" href="/Proyecto-Pokemon-Page-Pow/css/style.css">
   <link rel="stylesheet" href="/Proyecto-Pokemon-Page-Pow/css/index.css">
   <link rel="stylesheet" href="/Proyecto-Pokemon-Page-Pow/css/coleccion.css">
   <link rel="stylesheet" href="/Proyecto-Pokemon-Page-Pow/css/intercambio.css"> 
   <link rel="stylesheet" href="/Proyecto-Pokemon-Page-Pow/css/footer.css">
+
+  <!-- Fuentes e iconos -->
   <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -20,16 +24,17 @@
         <p id="trade-status-subtitle">Selecciona hasta 5 cartas para ofrecer.</p>
       </header>
 
-      <!-- Vista de Selección de Cartas -->
+      <!-- Vista de selección de cartas -->
       <section id="selection-view">
         <section class="selection-layout">
           <section class="selection-grid-wrapper">
             <h2 class="subtitle">Tus Cartas</h2>
             <section class="card-grid" id="cartas-propias">
-              <!-- Las cartas desbloqueadas se insertan aquí -->
+              <!-- Cartas desbloqueadas se insertan aquí dinámicamente -->
             </section>
             <button id="propose-btn" class="boton" disabled>Proponer Intercambio</button>
           </section>
+
           <aside class="trade-status-panel">
             <h3 class="subtitle">Estado del Intercambio</h3>
             <section id="trade-events">
@@ -38,28 +43,31 @@
           </aside>
         </section>
 
-        <!-- Agrega esto dentro de .selection-layout, después de .selection-grid-wrapper -->
+        <!-- Cartas del otro usuario -->
         <aside class="remote-selection-panel">
           <h3 class="subtitle" id="remote-user-label">Cartas del otro usuario</h3>
           <section class="card-grid" id="cartas-remotas">
-            <!-- Las cartas seleccionadas del otro usuario se mostrarán aquí -->
+            <!-- Las cartas seleccionadas del otro usuario aparecerán aquí -->
           </section>
         </aside>
       </section>
 
-      <!-- Vista de Confirmación -->
+      <!-- Vista de confirmación -->
       <section id="confirmation-view" class="hidden">
         <section class="trade-offer-container">
           <section class="offer-side">
             <h2 class="subtitle" id="local-user-name">Tu Oferta</h2>
             <section id="local-offer-card" class="card-grid"></section>
           </section>
+
           <div class="trade-icon">🔄</div>
+
           <section class="offer-side">
             <h2 class="subtitle" id="remote-user-name">Oferta de...</h2>
             <section id="remote-offer-card" class="card-grid"></section>
           </section>
         </section>
+
         <section class="confirmation-buttons">
           <button id="accept-btn" class="boton success">Aceptar</button>
           <button id="decline-btn" class="boton danger">Rechazar</button>
@@ -68,19 +76,19 @@
     </section>
   </main>
 
-  <!-- Modal para detalles de Pokémon -->
+  <!-- Modal para mostrar detalles de cartas -->
   <section id="pokemonModal" class="modal hidden">
     <section class="modal-content">
-        <button class="close" aria-label="Cerrar">&times;</button>
-        <section id="modalBody">
-            <!-- Contenido del modal -->
-        </section>
+      <button class="close" aria-label="Cerrar">&times;</button>
+      <section id="modalBody">
+        <!-- Contenido del modal -->
+      </section>
     </section>
   </section>
 
   <footer id="footer"></footer>
 
-  <!-- Librerías -->
+  <!-- Scripts -->
   <script src="https://cdn.ably.io/lib/ably.min-1.js"></script>
   <script src="/Proyecto-Pokemon-Page-Pow/js/Intercambio.js"></script>
 </body>
