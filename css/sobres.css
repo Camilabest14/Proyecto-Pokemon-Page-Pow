@@ -1,8 +1,10 @@
+/* --- Fondo general con degradado y espacio para footer fijo --- */
 body {
     background: linear-gradient(90deg, #8c52ff, #ff914d);
-    padding-bottom: 80px;
+    padding-bottom: 80px; /* Reservar espacio para navbar fija */
 }
 
+/* --- Contenedor principal del sobre --- */
 .pack-container {
     display: flex;
     flex-direction: column;
@@ -10,6 +12,7 @@ body {
     margin-bottom: 2rem;
 }
 
+/* --- Diseño de la carta sobre grande --- */
 .card-pack {
     background: linear-gradient(135deg, #ff66c4 60%, #8c52ff 100%);
     border-radius: 18px;
@@ -38,6 +41,7 @@ body {
     margin-bottom: 0.5rem;
 }
 
+/* --- Botón para abrir sobre --- */
 .open-pack-btn {
     padding: 0.8rem 2rem;
     font-size: 1.1rem;
@@ -54,14 +58,16 @@ body {
     background: #ff66c4;
 }
 
+/* --- Contenedor de las cartas obtenidas en el sobre --- */
 .cards-row {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap; /* Para que se ajusten en pantallas pequeñas */
+    flex-wrap: wrap; /* Ajuste automático en pantallas pequeñas */
     gap: 1rem;
     margin: 2rem 0 1rem 0;
 }
 
+/* --- Diseño de carta individual --- */
 .poke-card {
     width: 90px;
     height: 130px;
@@ -101,7 +107,7 @@ body {
     text-transform: capitalize;
 }
 
-/* 📱 Responsive - Teléfonos pequeños (<= 480px) */
+/* 📱 --- Responsive para teléfonos pequeños (<= 480px) --- */
 @media (max-width: 480px) {
     .card-pack {
         width: 160px;
@@ -130,7 +136,7 @@ body {
     }
 }
 
-/* 📱 Responsive - Teléfonos medianos (481px - 768px) */
+/* 📱 --- Responsive para teléfonos medianos (481px - 768px) --- */
 @media (min-width: 481px) and (max-width: 768px) {
     .card-pack {
         width: 180px;
@@ -159,7 +165,7 @@ body {
     }
 }
 
-/* 💻 Responsive - Tablets grandes y pantallas medianas (769px - 1024px) */
+/* 💻 --- Responsive para tablets grandes (769px - 1024px) --- */
 @media (min-width: 769px) and (max-width: 1024px) {
     .card-pack {
         width: 200px;

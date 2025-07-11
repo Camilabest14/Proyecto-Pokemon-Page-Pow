@@ -1,33 +1,38 @@
+/* --- Contenedor principal de la página de inicio --- */
 .main-home {
-    max-width: 500px;
-    margin: 60px auto 0 auto;
-    background: rgba(255,255,255,0.85);
+    max-width: 500px; /* Limitar ancho máximo */
+    margin: 60px auto 0 auto; /* Centrado horizontal con margen superior */
+    background: rgba(255,255,255,0.85); /* Fondo semitransparente */
     border-radius: 16px;
-    box-shadow: 0 4px 24px rgba(140,82,255,0.08);
-    padding: 2rem 1.5rem 3rem 1.5rem;
+    box-shadow: 0 4px 24px rgba(140,82,255,0.08); /* Sombra suave */
+    padding: 2rem 1.5rem 3rem 1.5rem; /* Espaciado interno */
     text-align: center;
 }
 
+/* --- Subtítulo debajo del título principal --- */
 .subtitle {
-    color: #8c52ff;
+    color: #8c52ff; /* Violeta principal */
     margin-bottom: 2rem;
     font-size: 1.2rem;
 }
 
+/* --- Contenedor de botones de acción en la home --- */
 .home-actions {
     display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
+    flex-wrap: wrap; /* Permite que los botones se ajusten en móviles */
+    gap: 1rem; /* Espacio entre botones */
     justify-content: center;
     margin-bottom: 2rem;
 }
 
+/* --- Imagen de Pokémon en la home --- */
 .home-pokemon-img {
     width: 120px;
     margin-top: 1.5rem;
-    filter: drop-shadow(0 2px 8px #ff66c4aa);
+    filter: drop-shadow(0 2px 8px #ff66c4aa); /* Sombra rosa */
 }
 
+/* --- Botones personalizados (nav-btn-2) --- */
 .nav-btn-2 {
     color: rgba(255, 255, 255, 0.9);
     text-decoration: none;
@@ -38,61 +43,70 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
     min-width: 60px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Fondo con degradado */
     box-shadow: 0 2px 8px rgba(140,82,255,0.10);
     margin-bottom: 0.5rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Transición suave */
 }
+
+/* --- Ícono dentro del botón --- */
 .nav-btn-2 i {
     font-size: 1.3rem;
     margin-bottom: 0.4rem;
     transition: all 0.3s ease;
 }
+
+/* --- Texto dentro del botón --- */
 .nav-btn-2 span {
     font-size: 0.75rem;
     letter-spacing: 0.5px;
     text-transform: uppercase;
     font-weight: 600;
 }
+
+/* --- Efecto hover brillante sobre el botón --- */
 .nav-btn-2::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
     border-radius: 12px;
     opacity: 0;
-    transition: all 0.3s ease;
     transform: scale(0.8);
+    transition: all 0.3s ease;
 }
+
 .nav-btn-2:hover::before {
     opacity: 1;
     transform: scale(1);
 }
+
 .nav-btn-2:hover {
     color: white;
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); /* Sombra más intensa en hover */
 }
+
 .nav-btn-2:hover i {
-    transform: scale(1.1);
+    transform: scale(1.1); /* Animación suave en ícono */
 }
+
 .nav-btn-2:active {
-    transform: translateY(0);
+    transform: translateY(0); /* Efecto rápido en clic */
     transition: all 0.1s ease;
 }
 
+/* --- Responsive para pantallas pequeñas (móviles) --- */
 @media (max-width: 600px) {
     .main-home {
-        margin: 30px 5px 0 5px;
-        padding: 1rem 0.5rem 2.5rem 0.5rem;
+        margin: 30px 5px 0 5px; /* Reducir márgenes */
+        padding: 1rem 0.5rem 2.5rem 0.5rem; /* Menor padding */
     }
     .home-pokemon-img {
-        width: 80px;
+        width: 80px; /* Imagen más pequeña */
     }
 }

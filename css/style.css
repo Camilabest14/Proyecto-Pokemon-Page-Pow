@@ -1,59 +1,66 @@
+/* --- Fondo general con degradado y espacio para navbar fija --- */
 body {
-    background: linear-gradient(90deg, #8c52ff, #ff914d);
-    padding-bottom: 80px;
+    background: linear-gradient(90deg, #8c52ff, #ff914d); /* Violeta a naranja */
+    padding-bottom: 80px; /* Espacio reservado para la navbar fija */
 }
 
-h1{
+/* --- Título principal centrado --- */
+h1 {
     text-align: center;
 }
 
+/* --- Navbar inferior fija --- */
 .navbar {
     display: flex;
     gap: 1rem;
-    background: linear-gradient(90deg, #ffde59, #ff66c4);
+    background: linear-gradient(90deg, #ffde59, #ff66c4); /* Amarillo a rosa */
     padding: 1rem;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 -2px 4px rgba(0,0,0,0.05);
-    border-color: black;
+    box-shadow: 0 -2px 4px rgba(0,0,0,0.05); /* Sombra superior */
+    border-color: black; /* ⚠️ Nota: no hay border-style definido */
     position: fixed;
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 1000;
+    z-index: 1000; /* Se mantiene sobre todo */
 }
 
-.input-tipo-pokemon{
+/* --- Contenedor para input tipo Pokémon --- */
+.input-tipo-pokemon {
     text-align: center;
     margin: 5px;
 }
 
+/* --- Scroll horizontal de botones de tipo --- */
 .opciones-tipo {
     display: flex;
     gap: 0.5rem;
-    overflow-x: auto;
+    overflow-x: auto; /* Permite scroll horizontal */
     padding: 0.5rem 0;
     justify-content: flex-start;
-    scrollbar-width: thin;
-    scrollbar-color: #ffcb05 #f8f8f8;
+    scrollbar-width: thin; /* Scrollbar estilizado para Firefox */
+    scrollbar-color: #ffcb05 #f8f8f8; /* Colores de la barra */
     margin-bottom: 1rem;
 }
 
+/* --- Botones de tipo Pokémon --- */
 .type-btn {
     padding: 0.5rem 1.2rem;
-    background: #ffcb05;
-    color: #2a75bb;
+    background: #ffcb05; /* Amarillo Pokémon */
+    color: #2a75bb; /* Azul Pokémon */
     border: none;
-    border-radius: 999px;
+    border-radius: 999px; /* Botón completamente redondeado */
     font-weight: bold;
     cursor: pointer;
-    transition: background 0.2s, color 0.2s;
-    white-space: nowrap;
+    transition: background 0.2s, color 0.2s; /* Transiciones suaves */
+    white-space: nowrap; /* Evita saltos de línea en botones */
     outline: none;
 }
 
+/* --- Estado activo y hover del botón --- */
 .type-btn.active,
 .type-btn:hover {
-    background: #2a75bb;
-    color: #fff;
+    background: #2a75bb; /* Fondo azul */
+    color: #fff;         /* Texto blanco */
 }

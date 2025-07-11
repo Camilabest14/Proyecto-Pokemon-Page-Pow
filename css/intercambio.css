@@ -1,7 +1,9 @@
+/* --- Fondo general para la vista de intercambio --- */
 body.intercambio {
-  background: linear-gradient(90deg, #8c52ff, #ff914d);
+  background: linear-gradient(90deg, #8c52ff, #ff914d); /* Degradado violeta a naranja */
 }
 
+/* --- Carta individual --- */
 .carta {
   width: 110px;
   height: 160px;
@@ -27,6 +29,7 @@ body.intercambio {
   box-shadow: 0 8px 20px rgba(140, 82, 255, 0.3);
 }
 
+/* --- Imagen dentro de la carta --- */
 .carta img {
   width: 72px;
   height: 72px;
@@ -35,6 +38,7 @@ body.intercambio {
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
 }
 
+/* --- Nombre del Pokémon en la carta --- */
 .carta .name {
   font-size: 0.8rem;
   color: rgb(8, 8, 8);
@@ -45,16 +49,19 @@ body.intercambio {
   letter-spacing: 0.5px;
 }
 
+/* --- Carta seleccionada para intercambio --- */
 .carta.seleccionada {
   transform: scale(1.08);
   box-shadow: 0 0 20px rgba(255, 223, 71, 0.8);
   border: 2px solid #FFDF47;
 }
 
+/* --- Clases utilitarias --- */
 .hidden {
   display: none !important;
 }
 
+/* --- Títulos y subtítulos --- */
 #trade-status-title {
   text-align: center;
   color: #333;
@@ -67,6 +74,7 @@ body.intercambio {
   min-height: 24px;
 }
 
+/* --- Layout principal --- */
 .selection-layout {
   display: flex;
   gap: 2rem;
@@ -90,6 +98,7 @@ body.intercambio {
   height: fit-content;
 }
 
+/* --- Eventos del intercambio --- */
 #trade-events {
   min-height: 100px;
   color: #555;
@@ -100,6 +109,7 @@ body.intercambio {
   font-size: 0.9rem;
 }
 
+/* --- Grid de cartas --- */
 .card-grid {
   display: flex;
   flex-wrap: wrap;
@@ -111,6 +121,7 @@ body.intercambio {
   padding-right: 8px; /* Espacio para scrollbar */
 }
 
+/* --- Contenedor de oferta de intercambio --- */
 .trade-offer-container {
   display: flex;
   justify-content: space-around;
@@ -134,6 +145,7 @@ body.intercambio {
   margin-top: 4rem;
 }
 
+/* --- Botones de confirmación --- */
 .confirmation-buttons {
   display: flex;
   justify-content: center;
@@ -174,6 +186,7 @@ body.intercambio {
   background-color: #c82333;
 }
 
+/* --- Cartas del otro usuario (marcadas como remotas) --- */
 .remote-selection-panel .carta {
   opacity: 0.7;
   border: 2px dashed #8c52ff;
@@ -181,6 +194,7 @@ body.intercambio {
   color: #333;
 }
 
+/* --- Botón Proponer Intercambio (sticky) --- */
 #propose-btn {
   position: sticky;
   bottom: 0;
@@ -189,15 +203,14 @@ body.intercambio {
   margin: 0 auto 1rem auto;
   display: block;
   z-index: 2;
-  /* Evita que quede muy cerca del borde inferior */
-  margin-bottom: 1rem;
+  margin-bottom: 1rem; /* Evitar que quede pegado al borde inferior */
 }
 
-/* Responsive para pantallas pequeñas */
+/* --- Responsive para móviles --- */
 @media screen and (max-width: 600px) {
   #propose-btn {
-    position: fixed; /* Se mantiene fijo en móviles */
-    bottom: 80px; /* Aumenta la distancia para evitar que se tape */
+    position: fixed; /* Botón fijo en móviles */
+    bottom: 80px; /* Espacio extra para no solaparse con navbar */
     left: 50%;
     transform: translateX(-50%);
     width: 90vw;
@@ -206,4 +219,3 @@ body.intercambio {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); /* Sombra para destacar */
   }
 }
-

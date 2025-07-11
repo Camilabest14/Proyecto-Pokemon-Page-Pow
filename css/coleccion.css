@@ -1,34 +1,34 @@
-/* Variables - Nueva paleta de colores */
+/* --- Variables de color (paleta principal) --- */
 :root {
     --primary: #ff66c4;         /* Rosa principal */
-    --secondary: #8c52ff;        /* Violeta principal */
-    --accent: #c852ff;           /* Violeta-rosa intermedio */
-    --light-pink: #ffc2e6;       /* Rosa claro */
-    --light-purple: #d0b3ff;     /* Violeta claro */
-    --light-bg: #fff5fd;         /* Fondo rosa muy claro */
-    --gray-100: #f8f0f7;         /* Gris con tono rosa */
-    --gray-300: #e5d5e3;         /* Gris medio con tono rosa */
-    --gray-500: #a98faa;         /* Gris oscuro con tono violeta */
-    --gray-900: #2a0f25;         /* Gris muy oscuro con tono morado */
+    --secondary: #8c52ff;       /* Violeta principal */
+    --accent: #c852ff;          /* Violeta-rosa intermedio */
+    --light-pink: #ffc2e6;      /* Rosa claro */
+    --light-purple: #d0b3ff;    /* Violeta claro */
+    --light-bg: #fff5fd;        /* Fondo rosa muy claro */
+    --gray-100: #f8f0f7;        /* Gris con tono rosa */
+    --gray-300: #e5d5e3;        /* Gris medio */
+    --gray-500: #a98faa;        /* Gris oscuro con tono violeta */
+    --gray-900: #2a0f25;        /* Gris muy oscuro */
     --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
 }
 
-/* Reset básico */
+/* --- Reset básico --- */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* --- Estilos generales del body --- */
 body {
     font-family: 'Arial', sans-serif;
     background: linear-gradient(90deg, #8c52ff, #ff914d);
-    padding-bottom: 80px;
-    padding: 20px 10px;
+    padding: 20px 10px 80px; /* padding inferior para evitar que el footer se solape */
     color: var(--gray-900);
 }
 
-/* Filtros */
+/* --- Filtros de búsqueda y tipo --- */
 .filters {
     display: flex;
     gap: 10px;
@@ -54,10 +54,10 @@ body {
     outline: none;
 }
 
-/* Grid de Pokémon - MOBILE FIRST */
+/* --- Grid de Pokémon (mobile-first) --- */
 .pokemon-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(5, 1fr); /* 5 columnas en móviles */
     gap: 8px;
     max-width: 100%;
 }
@@ -120,7 +120,7 @@ body {
     background: var(--accent);
 }
 
-/* Modal */
+/* --- Modal para mostrar detalles --- */
 .modal {
     position: fixed;
     top: 0;
@@ -212,6 +212,7 @@ body {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
+/* --- Colores por tipo de Pokémon --- */
 .type-grass { background: #78c850; }
 .type-fire { background: #f08030; }
 .type-water { background: #6890f0; }
@@ -222,6 +223,7 @@ body {
 .type-dark { background: #705848; }
 .type-fairy { background: #ee99ac; }
 
+/* --- Estadísticas dentro del modal --- */
 .pokemon-stats {
     margin-top: 20px;
     background: var(--light-bg);
@@ -245,10 +247,10 @@ body {
     font-weight: bold;
 }
 
-/* Tablet y Desktop */
+/* --- Responsive: tablet y escritorio --- */
 @media (min-width: 768px) {
     .pokemon-grid {
-        grid-template-columns: repeat(10, 1fr);
+        grid-template-columns: repeat(10, 1fr); /* Más columnas en pantallas grandes */
         gap: 12px;
     }
     .pokemon-card .name {
@@ -257,12 +259,11 @@ body {
     }
 }
 
-/* Alta resolución */
+/* Alta resolución (retina displays) */
 @media (min-resolution: 192dpi) {
     .pokemon-card {
         transition: transform 0.3s ease;
     }
-
     .pokemon-card:hover {
         transform: scale(1.05);
     }

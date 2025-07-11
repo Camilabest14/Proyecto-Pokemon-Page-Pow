@@ -1,3 +1,4 @@
+/* --- Reset básico y tipografía global --- */
 * {
     margin: 0;
     padding: 0;
@@ -5,13 +6,15 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* --- Body con espacio para la navbar fija --- */
 body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    padding-bottom: 100px; /* Espacio para el footer fijo */
+    padding-bottom: 100px; /* Reservar espacio para la navbar inferior */
 }
 
+/* --- Navbar inferior fija --- */
 .navbar {
     position: fixed;
     bottom: 0;
@@ -19,17 +22,19 @@ body {
     right: 0;
     width: 100%;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);             /* Efecto de desenfoque */
+    -webkit-backdrop-filter: blur(10px);     /* Compatibilidad con Safari */
     display: flex;
     justify-content: space-around;
     align-items: center;
     padding: 1rem 0;
-    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15), 0 -1px 4px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15), 
+                0 -1px 4px rgba(0, 0, 0, 0.1); /* Sombra superior */
+    z-index: 1000; /* Mantener sobre otros elementos */
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* --- Botones de la navbar --- */
 .nav-btn {
     color: rgba(255, 255, 255, 0.9);
     text-decoration: none;
@@ -59,14 +64,13 @@ body {
     font-weight: 600;
 }
 
+/* --- Efecto hover elegante --- */
 .nav-btn::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
     border-radius: 12px;
     opacity: 0;
     transition: all 0.3s ease;
@@ -81,71 +85,74 @@ body {
 .nav-btn:hover {
     color: white;
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
 }
 
 .nav-btn:hover i {
     transform: scale(1.1);
 }
 
+/* --- Animación rápida en clic --- */
 .nav-btn:active {
     transform: translateY(0);
     transition: all 0.1s ease;
 }
 
-/* Estado activo para el botón actual */
+/* --- Estado activo (página actual) --- */
 .nav-btn.active {
     background: rgba(255, 255, 255, 0.15);
     color: white;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
+/* --- Responsive: Tablets --- */
 @media (max-width: 768px) {
     body {
-        padding-bottom: 75px;
+        padding-bottom: 75px; /* Reducir espacio reservado */
     }
-    
+
     .navbar {
         padding: 0.8rem 0;
     }
-    
+
     .nav-btn {
         font-size: 0.8rem;
         padding: 0.5rem 1rem;
         min-width: 55px;
     }
-    
+
     .nav-btn i {
         font-size: 1.2rem;
         margin-bottom: 0.3rem;
     }
-    
+
     .nav-btn span {
         font-size: 0.7rem;
     }
 }
 
+/* --- Responsive: Móviles --- */
 @media (max-width: 480px) {
     body {
-        padding-bottom: 65px;
+        padding-bottom: 65px; /* Más compacto en móviles */
     }
-    
+
     .navbar {
         padding: 0.6rem 0;
     }
-    
+
     .nav-btn {
         font-size: 0.7rem;
         padding: 0.4rem 0.6rem;
         min-width: 50px;
     }
-    
-    .nav-btn span {
-        font-size: 0.65rem;
-    }
-    
+
     .nav-btn i {
         font-size: 1.1rem;
         margin-bottom: 0.2rem;
+    }
+
+    .nav-btn span {
+        font-size: 0.65rem;
     }
 }
