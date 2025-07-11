@@ -1,3 +1,24 @@
+body {
+    background: linear-gradient(-45deg, #8c52ff, #ff914d, #ffde59, #ff66c4);
+    background-size: 400% 400%;
+    animation: gradientMove 10s ease infinite;
+    padding-bottom: 80px;
+}
+
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+
 .main-home {
     max-width: 500px;
     margin: 60px auto 0 auto;
@@ -94,5 +115,21 @@
     }
     .home-pokemon-img {
         width: 80px;
+    }
+}
+
+.home-pokemon-img {
+    width: 120px;
+    margin-top: 1.5rem;
+    filter: drop-shadow(0 2px 8px #ff66c4aa);
+    animation: bounce 2s infinite ease-in-out;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
     }
 }
