@@ -56,7 +56,14 @@ body.intercambio {
 #trade-status-subtitle { text-align: center; color: #666; margin-bottom: 2rem; min-height: 24px; }
 
 .selection-layout { display: flex; gap: 2rem; align-items: flex-start; }
-.selection-grid-wrapper { flex: 3; display: flex; flex-direction: column; align-items: center; }
+.selection-grid-wrapper { 
+  flex: 3; 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  position: relative;
+  padding-bottom: 70px; /* Espacio para el botón sticky */
+}
 .trade-status-panel { flex: 1; background-color: rgba(240, 240, 240, 0.7); border-radius: 12px; padding: 1rem; height: fit-content; }
 #trade-events { min-height: 100px; color: #555; }
 #trade-events p { margin-bottom: 0.5rem; font-size: 0.9rem; }
@@ -67,6 +74,9 @@ body.intercambio {
   gap: 1rem;
   justify-content: center;
   margin-bottom: 1.5rem;
+  max-height: 260px;      /* NUEVO: altura máxima */
+  overflow-y: auto;       /* NUEVO: scroll vertical */
+  padding-right: 8px;     /* Opcional: espacio para scrollbar */
 }
 
 .trade-offer-container { 
@@ -138,4 +148,26 @@ body.intercambio {
   border: 2px dashed #8c52ff;
   background: #fff;
   color: #333;
+}
+
+#propose-btn {
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  width: 90%;
+  margin: 0 auto 1rem auto;
+  display: block;
+  z-index: 2;
+}
+
+@media (max-width: 600px) {
+  #propose-btn {
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90vw;
+    max-width: 400px;
+    z-index: 1000;
+  }
 }
